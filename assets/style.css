@@ -1,11 +1,7 @@
-html {
-    position: relative;
-    min-height: 100%;
-}
-
 body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 60px;
 }
 
 img {
@@ -13,29 +9,19 @@ img {
     max-height: 40em;
 }
 
-.row > h1 {
-    font-size: 36px;
-    border-bottom: 1px solid #eee;
+pre {
+    max-width: 100%;
+    border: 1px solid #D4D4D5;
+    border-radius: .28571429rem;
+    padding: 8px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
 }
 
-.row > h2 {
-    font-size: 30px;
-}
-
-.row > h3 {
-    font-size: 26px;
-}
-
-.row > h4 {
-    font-size: 22px;
-}
-
-.row > h5 {
-    font-size: 18px;
-}
-
-.row > h6 {
-    font-size: 16px;
+code {
+    background-color: #f5f5f5;
+    border-radius: 2px;
 }
 
 a.anchor {
@@ -58,21 +44,45 @@ a.anchor:active {
     text-decoration: none;
 }
 
+.heading {
+    margin: 10px 0 0 0 !important;
+}
+
+.page-title {
+    display: inline-block;
+    margin: 10px !important;
+    font-size: 1.6rem;
+    vertical-align: sub;
+}
+
+.page-content {
+    margin: 5px;
+}
+
 .index-content {
-    margin: 0 20px;
+    margin: 0;
+}
+
+.sidebar-column {
+    width: 100% !important;
+    word-break: break-word;
+}
+
+.sidebar-avatar {
+    max-width: 100%;
 }
 
 .footer {
+    background: #f5f5f5;
+    height: 60px;
+    width: 100%;
     position: absolute;
     bottom: 0;
-    width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 60px;
-    background-color: #f5f5f5;
 }
 
 .footer-text {
-    margin: 15px 80px;
+    padding: 1.5em;
+    text-align: center;
 }
 
 .logo-text {
