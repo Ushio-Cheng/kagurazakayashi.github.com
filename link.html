@@ -40,7 +40,16 @@
         <div id="bannerl">
         </div>
         <div id="bannerr">
-            <img src="resources/ysn.png" width="245px" height="300px" />
+            <svg class="bannerrsize">
+                <defs>
+                <mask id="mask" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
+                    <image width="245px" height="300px" xlink:href="resources/ysnmask.png"></image>
+                </mask>
+                </defs>
+                <foreignObject width="245px" height="300px" style="mask: url(#mask);">
+                <div class="bannerrsize" id="bannerri"></div>
+                </foreignObject>
+            </svg>
         </div>
         <div id="banner">
             <div id="banneru"></div>

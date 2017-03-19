@@ -115,9 +115,12 @@ repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2
     /*background-size: 245px 300px;
     background-image: url(ysn.jpg);
     background-repeat: no-repeat;*/
+    -webkit-mask-image: url('../resources/ysnmask.png');
 }
 #bannerri {
     overflow: hidden;
+    background-image: url('../resources/ysn.jpg');
+    /*-webkit-mask-image: url(ysnmask.png);*/
     background-repeat: no-repeat;
     background-color: #FE99CC;
 }
