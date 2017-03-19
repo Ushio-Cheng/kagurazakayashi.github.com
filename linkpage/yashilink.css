@@ -139,12 +139,73 @@ repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2
     width: 245px;
     height: 300px;
 }
-.spinner {
-  margin: 100px auto;
-  width: 60px;
-  height: 60px;
-  text-align: center;
-  font-size: 10px;
+.webview {
+    position: absolute;
+    width: 320px;
+    height: 400px;
+    background-color: #ffbcde;
+    background-size: 320px 240px;
+    background-repeat: no-repeat;
+    cursor: url('../resources/hand.cur'), auto;
+    box-shadow:0px 5px 10px #cccccc;
+}
+.webview:hover {
+    animation: webviewhover 0.5s;
+    animation-fill-mode: forwards;
+}
+@keyframes webviewhover {
+    from {box-shadow:0px 5px 10px #cccccc;}
+    to {box-shadow:0px 5px 10px #808080;}
+}
+.webinfo {
+    position: absolute;
+    top: 240px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+.webview h1 {
+	font-size: 20px;
+    color: #000;
+}
+.webview h2 {
+	font-size: 15px;
+    color: #884b6a;
+}
+.webview h3 {
+	font-size: 12px;
+    color: #c46997;
+}
+.infobtnbg {
+    position: absolute;
+    width: 100%;
+    height: 240px;
+    color: #FFF;
+    text-shadow:0px 0px 5px #000;
+    font-size: 20px;
+}
+.infobtn {
+    position:absolute;
+    bottom:10px;
+    right: 10px;
+    text-align: right;
+}
+.infobtn a {
+    color: #FFF;
+}
+.infobtn a:hover {
+	text-decoration: none;
+	color: #FFFF00;
+}
+.urlinfo {
+    position: absolute;
+    width: 100%;
+    height: 240px;
+    line-height: 240px;
+    text-align: center;
+    background-color: rgba(254,153,204,0.7);
+    font-size: 20px;
+    color: #FFF;
 }
 #foot {
     width: 100%;
@@ -156,6 +217,13 @@ repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2
     position: absolute;
     width: 100%;
     top: 600px;
+}
+.spinner {
+  margin: 100px auto;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  font-size: 10px;
 }
 .spinner > div {
   background-color: #FE99CC;
