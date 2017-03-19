@@ -47,6 +47,47 @@ function loaddata(data) {
     resize(true);
 }
 function resize(ani) {
+    var screenwidth = $(window).width();
+    var cw = 20;
+    var ch = 20;
+    var y = ch;
+    var w = 320;
+    var h = 400;
+    var e = 0;
+    var tw = -1;
+    if (screenwidth <= (w + cw * 4)) {
+        cw = 0;
+        // w = screenwidth;
+        console.log("应用手机版式。"+screenwidth);
+    }
+    for (var i=0;i<datdatacount;i++) {
+        x = cw + (w + cw) * i - e;
+        if (x > screenwidth - (w + cw) - cw) {
+            if (tw == -1) {
+                tw = cw + (w + cw) * i;
+            }
+            e += x - cw;
+            x = cw;
+            y += (h + ch);
+        }
+        var webview = $("#webview"+i);
+        if (ani == false) {
+            webview.css("top",y);
+            webview.css("left",x);
+        } else {
+            webview.animate({
+                top:y,
+                left:x
+            });
+        }
+    }
+    y += (h + ch);
+    var contents = $("#contents");
+    contents.css("left",screenwidth/2-tw/2-cw/2);
+    contents.css("width",tw);
+    contents.css("height",y);
+    // $("#titlebar").css("width",screenwidth);
+    $("#d2").css("top",y+300);
 }
 $(window).scroll(function() {
     var scrtop = $(window).scrollTop();
