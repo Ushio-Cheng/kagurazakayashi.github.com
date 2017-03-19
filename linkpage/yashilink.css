@@ -218,6 +218,23 @@ repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2
     width: 100%;
     top: 600px;
 }
+#yashiplanetbtn {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background-color: #ffbcde;
+    text-align: center;
+    cursor: url('../resources/hand.cur'), auto;
+}
+#yashiplanetbtn:hover {
+    background-color: #FE99CC;
+}
+#yashiplanet {
+    overflow:hidden;
+    margin-left: 20px;
+    margin-right: 20px;
+    user-select: text;
+}
 .spinner {
   margin: 100px auto;
   width: 60px;

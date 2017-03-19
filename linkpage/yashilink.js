@@ -7,7 +7,11 @@ $(document).ready(function(){
             console.log("数据 "+datdatacount+": "+xhr.status+": "+xhr.statusText);
             console.log(responseTxt);
             loaddata(items);
+            $("#d2").prepend('<div id="yashiplanetbtn">☆ 点此加载内容聚合 ☆</div>');
             $('body,html').scrollTop = 0;
+            $("#yashiplanetbtn").click(function() {
+                loadplanet();
+            });
         }
         if(statusTxt == "error") {
             $("#contents").html("<center><h1>数据加载失败，请稍后刷新再试。</h1></center>");
@@ -45,6 +49,32 @@ function loaddata(data) {
         });
     });
     resize(true);
+}
+function loadplanet() {
+    if ($(window).height() > $(window).width()) {
+        if (confirm('雅诗提醒：可能会产生较多的流量，继续吗？')) {
+            loadplanet2();
+        }
+    } else {
+        loadplanet2();
+    }
+}
+function loadplanet2() {
+    var yashiplanetbtn = $("#yashiplanetbtn");
+    yashiplanetbtn.css("pointer-events","none");
+    yashiplanetbtn.css("background-color","#808080");
+    yashiplanetbtn.html("正在加载内容聚合……");
+    $("#yashiplanet").load("linkpage/planet/index.html",function(responseTxt,statusTxt,xhr,data) {
+        if(statusTxt == "success") {
+            $("#yashiplanetbtn").remove();
+            $('body,html').scrollTop = $("#d2").top;
+        } else if(statusTxt == "error") {
+            $("#yashiplanetbtn").html("内容聚合加载失败,点击重试");
+            console.error("聚合加载失败: "+xhr.status+": "+xhr.statusText);
+            yashiplanetbtn.css("pointer-events","auto");
+            yashiplanetbtn.css("background-color","#ffbcde");
+        }
+    });
 }
 function resize(ani) {
     var screenwidth = $(window).width();
