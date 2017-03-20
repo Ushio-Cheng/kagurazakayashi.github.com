@@ -218,6 +218,9 @@ repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2
     width: 100%;
     top: 600px;
 }
+#d2titlebar {
+    height: 50px;
+}
 #yashiplanetbtn {
     width: 100%;
     height: 50px;

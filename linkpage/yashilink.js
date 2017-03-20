@@ -9,6 +9,10 @@ $(document).ready(function(){
             loaddata(items);
             $("#d2").prepend('<div id="yashiplanetbtn">☆ 点此加载内容聚合 ☆</div>');
             $('body,html').scrollTop = 0;
+            window.location = "#top";
+            $(".tbtn").click(function() {
+                window.location = $(this).attr("href");
+            });
             $("#yashiplanetbtn").click(function() {
                 loadplanet();
             });
@@ -18,6 +22,7 @@ $(document).ready(function(){
             console.error("数据加载失败: "+xhr.status+": "+xhr.statusText);
         }
     });
+    switchtab();
 });
 function loaddata(data) {
     var contents = $("#contents");
@@ -66,6 +71,7 @@ function loadplanet2() {
     yashiplanetbtn.html("正在加载内容聚合……");
     $("#yashiplanet").load("linkpage/planet/index.html",function(responseTxt,statusTxt,xhr,data) {
         if(statusTxt == "success") {
+            $("#yashiplanet").prepend('<div id="d2titlebar"></div>');
             $("#yashiplanetbtn").remove();
             $('body,html').scrollTop = $("#d2").top;
         } else if(statusTxt == "error") {
@@ -119,7 +125,7 @@ function resize(ani) {
     // $("#titlebar").css("width",screenwidth);
     $("#d2").css("top",y+300);
 }
-$(window).scroll(function() {
+$(window).scroll(function () {
     var scrtop = $(window).scrollTop();
     if (scrtop >= 250) {
         $("#bannerr").css("visibility","hidden");
@@ -131,7 +137,19 @@ $(window).scroll(function() {
     } else {
         $("#bannerl").css("visibility","visible");
     }
+    switchtab(scrtop);
 });
 $(window).resize(function() {
     resize(true);
 });
+function switchtab(scrtop = 0) {
+    var youlian = $("#tbtn1");
+    var juhe = $("#tbtn2");
+    if (scrtop >= ($("#d2").offset().top-60)) {
+        juhe.css("background-color","#cccccc");
+        youlian.css("background-color","transparent");
+    } else {
+        juhe.css("background-color","transparent");
+        youlian.css("background-color","#cccccc");
+    }
+}
