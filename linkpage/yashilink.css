@@ -1,15 +1,21 @@
+@font-face {
+    font-family: 'webfont';
+    src: url('zcoolgaoduanhei151105.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
 body {
 	margin-left: 0px;
 	margin-top: 0px;
 	margin-right: 0px;
 	margin-bottom: 0px;
 	background-repeat: no-repeat;
-    font-family: "Droid Sans Mono","Courier New","monospace","Droid Sans Fallback","Source Code Pro","微软雅黑","思源黑体","Source Han Sans","Microsoft YaHei","Hiragino Sans GB","STHeiti Light","SimHei";
     cursor: url('../resources/Arrow.cur'), auto;
     background-size:100px 100px;
     user-select: none;
 }
-body,td,th {
+body,td,th,div {
+    font-family: "思源黑体","Source Han Sans","微软雅黑","Microsoft YaHei","Hiragino Sans GB","STHeiti Light","SimHei";
 	font-size: 14px;
 }
 a:link {
@@ -165,8 +171,10 @@ repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2
     padding-bottom: 10px;
 }
 .webview h1 {
-	font-size: 20px;
+	font-size: 22px;
     color: #000;
+    font-family: 'webfont';
+    font-weight: normal;
 }
 .webview h2 {
 	font-size: 15px;
@@ -174,7 +182,7 @@ repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2
 }
 .webview h3 {
 	font-size: 12px;
-    color: #c46997;
+    color: #884b6a;
 }
 .infobtnbg {
     position: absolute;
@@ -189,6 +197,7 @@ repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2
     bottom:10px;
     right: 10px;
     text-align: right;
+    font-size: 20px;
 }
 .infobtn a {
     color: #FFF;
