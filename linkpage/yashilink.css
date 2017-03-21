@@ -60,9 +60,6 @@ a:active {
     color: #c46997;
     cursor: url('../resources/hand.cur'), auto;
 }
-.tbtn:hover {
-    color: blue;
-}
 #tbtn1 {
     left: 10px;
     background-color: transparent;
