@@ -14,13 +14,33 @@ body {
 }
 .nyarukodiv {
     position: fixed;
+    overflow: hidden;
 }
 #nyarukoplayer {
     position: fixed;
     left: 0;
-    right: 0;
     top: 0;
-    bottom: 0;
     overflow: hidden;
     background-color: gray;
+}
+#audiodiv {
+    position: fixed;
+    background-size: cover;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    animation: change 2s linear infinite;
+    cursor: url('../resources/hand.cur'), auto;
+}
+@keyframes change {
+    0%{
+        transform:rotate(0deg);
+    }
+    50%{
+        transform:rotate(180deg);
+    }
+    100%{
+        transform:rotate(360deg);
+    }
 }

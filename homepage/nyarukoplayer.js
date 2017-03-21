@@ -25,6 +25,8 @@ function nyarukoplayer_init(data) {
             console.log("图片已加载 "+nyarukoplayer_loaded+"/"+nyarukoplayer_count);
             if (nyarukoplayer_loaded == nyarukoplayer_count) {
                 console.log("加载完成。");
+                $("#audiodiv").css("background","url('resources/btn_audio.png') no-repeat");
+                document.getElementById("mp3Btn").play();
                 nyarukoplayer_play();
             }
         };
@@ -44,11 +46,21 @@ function nyarukoplayer_play() {
     nyarukodiv.append(nimg);
     var nfrom = nyarukoplayer_from[nyarukoplayer_now];
     var nto = nyarukoplayer_to[nyarukoplayer_now];
-    var ntime = nyarukoplayer_time[nyarukoplayer_now];
-    var nfromcss = nyarukoplayer_frame("D",imgwidth,imgheight,screenwidth,screenheight);
+    var ntime = nyarukoplayer_time[nyarukoplayer_now] * 1000;
+    var nfromcss = nyarukoplayer_frame(nfrom,imgwidth,imgheight,screenwidth,screenheight);
+    var ntocss = nyarukoplayer_frame(nto,imgwidth,imgheight,screenwidth,screenheight);
     nyarukodiv.css({"left":nfromcss[0],"top":nfromcss[1],"width":nfromcss[2],"height":nfromcss[3]});
+    nyarukodiv.animate({"left":ntocss[0],"top":ntocss[1],"width":ntocss[2],"height":ntocss[3]},ntime,function(){
+        nyarukoplayer_now++;
+        if (nyarukoplayer_now >= nyarukoplayer_count) {
+            nyarukoplayer_now = 0;
+        }
+        nyarukodiv.remove();
+        nyarukoplayer_play();
+    });
 }
 function nyarukoplayer_frame(position,imgwidth,imgheight,screenwidth,screenheight) {
+    $("#nyarukoplayer").css({"width":screenwidth,"height":screenheight});
     var x = 0;
     var y = 0;
     var w = 0;
@@ -57,7 +69,7 @@ function nyarukoplayer_frame(position,imgwidth,imgheight,screenwidth,screenheigh
     if (position == "L") { //左
         x = 0;
         w = imgwh * screenheight;
-        if(w < screenwidth){
+        if(w < screenwidth){1
             w = screenwidth;
         }
         h = w/imgwh;
@@ -86,6 +98,32 @@ function nyarukoplayer_frame(position,imgwidth,imgheight,screenwidth,screenheigh
         w = h*imgwh;
         y = screenheight - h;
         x = (screenwidth - w)/2;
+    } else if (position == "C") { //中
+        var cw = screenwidth - imgwidth;
+        var ch = screenheight - imgheight;
+        if(cw > ch){
+            w = screenwidth;
+            h = w/imgwh;
+            y = (screenheight - h)/2;
+        }else{
+            h = screenheight;
+            w = h*imgwh;
+            x = (screenwidth - w)/2;
+        }
+    } else if (position == "B") { //大
+        var cw = screenwidth - imgwidth;
+        var ch = screenheight - imgheight;
+        if(cw > ch){
+            w = screenwidth*1.2;
+            h = w/imgwh;
+            x = (screenwidth - w)/2;
+            y = (screenheight - h)/2;
+        }else{
+            h = screenheight*1.2;
+            w = h*imgwh;
+            x = (screenwidth - w)/2;
+            y = (screenheight - h)/2;
+        }
     }
     console.log(x+","+y+","+w+","+h);
     return [x,y,w,h];

@@ -1,4 +1,18 @@
 $(document).ready(function(){
+    var audio = document.getElementById("mp3Btn");
+    var audiodiv = $("#audiodiv");
+    audio.pause();
+    audiodiv.click(function(){
+        event.stopPropagation();
+        if(audio.paused)
+        {
+            audiodiv.css("animation","change 2s linear infinite");
+            audio.play();
+            return;
+        }
+        audiodiv.css("animation","none");
+        audio.pause();
+    });
     $.getJSON("homepage/nyarukoplayer/nyaruko.json",function(responseTxt,statusTxt,xhr,data){
         if(statusTxt == "success") {
             var items = xhr.responseJSON;
