@@ -23,15 +23,22 @@
         <link rel="apple-touch-icon" href="resources/iPhone3x-180.png" />
         <link rel="apple-touch-icon-precomposed" href="resources/iPhone3x-180.png" />
         <link rel="stylesheet" type="text/css" href="homepage/yashihome.css" />
+        <link rel="stylesheet" type="text/css" href="homepage/nyarukoplayer.css" />
         <script type="text/javascript" src="resources/jquery.min.js"></script>
         <script type="text/javascript" src="homepage/nyarukoplayer.js"></script>
         <script type="text/javascript" src="homepage/yashihome.js"></script>
     </head>
     <body>
+        <div id="nyarukoplayerloading">
+            <div id="nyarukoplayerloadingok">
+                Loading...
+            </div>
+        </div>
         <div id="nyarukoplayer"></div>
         <div id="audiodiv">
             <audio id="mp3Btn" autoplay loop>
-                <source src="homepage/nyarukoplayer/nyaruko.mp3" type="audio/mpeg" />
+                <source src="homepage/nyarukoplayer/nyaruko.mp3" />
+                <!--<source src="homepage/nyarukoplayer/nyaruko.ogg" />-->
             </audio>
         </div>
         <!--<img class="nyaruko" src="homepage/nyarukoplayer/nyaruko1-LtoR-4.82s.jpg" />-->

@@ -7,6 +7,23 @@ var nyarukoplayer_time = [];
 var nyarukoplayer_count = 0;
 var nyarukoplayer_loaded = 0;
 var nyarukoplayer_now = 0;
+function nyarukoplayer_audioinit() {
+    var audio = document.getElementById("mp3Btn");
+    var audiodiv = $("#audiodiv");
+    audio.load();
+    audio.pause();
+    audiodiv.click(function(){
+        event.stopPropagation();
+        if(audio.paused)
+        {
+            audiodiv.css("animation","change 2s linear infinite");
+            audio.play();
+            return;
+        }
+        audiodiv.css("animation","none");
+        audio.pause();
+    });
+}
 function nyarukoplayer_init(data) {
     console.log("Yashi NyarukoPlayer");
     nyarukoplayer_count = data.length;
@@ -23,15 +40,30 @@ function nyarukoplayer_init(data) {
             nyarukoplayer_imgcache[i] = $(this);
             nyarukoplayer_loaded++;
             console.log("图片已加载 "+nyarukoplayer_loaded+"/"+nyarukoplayer_count);
+            var progress = nyarukoplayer_loaded / nyarukoplayer_count * 100;
+            var nyarukoplayerloadingok = $("#nyarukoplayerloadingok");
+            nyarukoplayerloadingok.html("Loading..."+progress.toFixed(0)+"%");
+            nyarukoplayerloadingok.css("width",progress+"%");
             if (nyarukoplayer_loaded == nyarukoplayer_count) {
                 console.log("加载完成。");
-                $("#audiodiv").css("background","url('resources/btn_audio.png') no-repeat");
-                document.getElementById("mp3Btn").play();
-                nyarukoplayer_play();
+                if ($("#audiodiv") && $("mp3Btn") && $("#nyarukoplayer")) {
+                    $("#audiodiv").css("background","url('resources/btn_audio.png') no-repeat");
+                    $("#nyarukoplayerloading").remove();
+                    if (!!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
+                        console.log("检测到iOS,不自动播放。");
+                    } else {
+                        $("#audiodiv").css("animation","change 2s linear infinite");
+                        document.getElementById("mp3Btn").play();
+                    }
+                    nyarukoplayer_play();
+                } else {
+                    console.error("没有导入相关div，无法播放。");
+                }
             }
         };
         nimg.onerror=function(){
             console.error("加载失败。");
+            $("#nyarukoplayer").html("<br><center>[yashi nyarukoplayer]数据加载失败，请稍后刷新再试。</center>");
         };
     });
 }
