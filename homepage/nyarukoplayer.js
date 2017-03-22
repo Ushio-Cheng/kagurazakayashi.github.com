@@ -25,7 +25,7 @@ function nyarukoplayer_audioinit() {
     });
 }
 function nyarukoplayer_init(data) {
-    console.log("Yashi NyarukoPlayer");
+    console.log("[Yashi NyarukoPlayer] Loading images...");
     nyarukoplayer_count = data.length;
     $.each(data, function(i, items) {
         imgurl = "homepage/nyarukoplayer/"+items[0];
@@ -39,25 +39,25 @@ function nyarukoplayer_init(data) {
         nimg.onload=function(){
             nyarukoplayer_imgcache[i] = $(this);
             nyarukoplayer_loaded++;
-            console.log("图片已加载 "+nyarukoplayer_loaded+"/"+nyarukoplayer_count);
             var progress = nyarukoplayer_loaded / nyarukoplayer_count * 100;
+            console.log("Loading... "+nyarukoplayer_loaded+"/"+nyarukoplayer_count+" : "+progress+"%");
             var nyarukoplayerloadingok = $("#nyarukoplayerloadingok");
             nyarukoplayerloadingok.html("Loading..."+progress.toFixed(0)+"%");
             nyarukoplayerloadingok.css("width",progress+"%");
             if (nyarukoplayer_loaded == nyarukoplayer_count) {
-                console.log("加载完成。");
+                console.log("[yashi nyarukoplayer] Load complete.");
                 if ($("#audiodiv") && $("mp3Btn") && $("#nyarukoplayer")) {
                     $("#audiodiv").css("background","url('resources/btn_audio.png') no-repeat");
                     $("#nyarukoplayerloading").remove();
                     if (!!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
-                        console.log("检测到iOS,不自动播放。");
+                        console.log("[yashi nyarukoplayer] 检测到iOS,不自动播放。");
                     } else {
                         $("#audiodiv").css("animation","change 2s linear infinite");
                         document.getElementById("mp3Btn").play();
                     }
                     nyarukoplayer_play();
                 } else {
-                    console.error("没有导入相关div，无法播放。");
+                    console.error("[yashi nyarukoplayer] 没有导入相关div，无法播放。");
                 }
             }
         };
@@ -83,12 +83,15 @@ function nyarukoplayer_play() {
     var ntocss = nyarukoplayer_frame(nto,imgwidth,imgheight,screenwidth,screenheight);
     nyarukodiv.css({"left":nfromcss[0],"top":nfromcss[1],"width":nfromcss[2],"height":nfromcss[3]});
     nyarukodiv.animate({"left":ntocss[0],"top":ntocss[1],"width":ntocss[2],"height":ntocss[3]},ntime,function(){
-        nyarukoplayer_now++;
-        if (nyarukoplayer_now >= nyarukoplayer_count) {
-            nyarukoplayer_now = 0;
+        console.log("[Yashi NyarukoPlayer] "+(nyarukoplayer_now+1)+"/"+nyarukoplayer_count);
+        if (nyarukoplayer_now < nyarukoplayer_count-1) {
+            nyarukoplayer_now++;
+            nyarukodiv.remove();
+            nyarukoplayer_play();
+        } else {
+            console.log("[yashi nyarukoplayer] End.");
+            $("#titlebox").css("background","transparent");
         }
-        nyarukodiv.remove();
-        nyarukoplayer_play();
     });
 }
 function nyarukoplayer_frame(position,imgwidth,imgheight,screenwidth,screenheight) {
@@ -131,17 +134,11 @@ function nyarukoplayer_frame(position,imgwidth,imgheight,screenwidth,screenheigh
         y = screenheight - h;
         x = (screenwidth - w)/2;
     } else if (position == "C") { //中
-        var cw = screenwidth - imgwidth;
-        var ch = screenheight - imgheight;
-        if(cw > ch){
-            w = screenwidth;
-            h = w/imgwh;
-            y = (screenheight - h)/2;
-        }else{
-            h = screenheight;
-            w = h*imgwh;
-            x = (screenwidth - w)/2;
-        }
+        var ccss = nyarukoplayer_imgcenter(imgwidth,imgheight,screenwidth,screenheight);
+        x = ccss[0];
+        y = ccss[1];
+        w = ccss[2];
+        h = ccss[3];
     } else if (position == "B") { //大
         var cw = screenwidth - imgwidth;
         var ch = screenheight - imgheight;
@@ -157,6 +154,68 @@ function nyarukoplayer_frame(position,imgwidth,imgheight,screenwidth,screenheigh
             y = (screenheight - h)/2;
         }
     }
-    console.log(x+","+y+","+w+","+h);
+    console.log(x+","+y+","+w+","+h+","+imgwh);
+    return [x,y,w,h];
+}
+function nyarukoplayer_resizeendimg() {
+    var screenwidth = $(window).width();
+    var screenheight = $(window).height();
+    var imgwidth = nyarukoplayer_width[nyarukoplayer_now];
+    var imgheight = nyarukoplayer_height[nyarukoplayer_now];
+    var ccss = nyarukoplayer_imgcenter(imgwidth,imgheight,screenwidth,screenheight);
+    x = ccss[0];
+    y = ccss[1];
+    w = ccss[2];
+    h = ccss[3];
+    // console.log(cw+","+ch+","+screenwidth+","+imgwidth+","+screenheight+","+imgheight+","+imgwh+","+(cw/ch));
+    $(".nyarukodiv").css({"left":x,"top":y,"width":w,"height":h});
+}
+function nyarukoplayer_imgcenter(imgwidth,imgheight,screenwidth,screenheight) {
+    var x = 0;
+    var y = 0;
+    var w = 0;
+    var h = 0;
+    var imgwh = imgwidth / imgheight;
+    var cw = screenwidth - imgwidth;
+    var ch = screenheight - imgheight;
+    var cwh = cw / ch;
+    if (cw > ch) {
+        w = screenwidth;
+        h = w/imgwh;
+        y = (screenheight - h) / 2;
+    }else{
+        h = screenheight;
+        w = h*imgwh;
+        x = (screenwidth - w) / 2;
+    }
+    if (imgwh > 1) {
+        if(cwh > 1.01 && cwh < imgwh){
+            if(cw < ch){
+                w = screenwidth;
+                h = w/imgwh;
+                y = (screenheight - h) / 2;
+                x = 0;
+            }else{
+                h = screenheight;
+                w = h*imgwh;
+                x = (screenwidth - w) / 2;
+                y = 0;
+            }
+        }
+    } else {
+        if(cwh > imgwh && cwh < 1){
+            if(cw < ch){
+                w = screenwidth;
+                h = w/imgwh;
+                y = (screenheight - h) / 2;
+                x = 0;
+            }else{
+                h = screenheight;
+                w = h*imgwh;
+                x = (screenwidth - w) / 2;
+                y = 0;
+            }
+        }
+    }
     return [x,y,w,h];
 }

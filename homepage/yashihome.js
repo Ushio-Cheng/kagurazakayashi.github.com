@@ -14,3 +14,6 @@ $(document).ready(function(){
         }
     });
 });
+$(window).resize(function() {
+    nyarukoplayer_resizeendimg();
+});
