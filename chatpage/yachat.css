@@ -1,0 +1,121 @@
+@charset "utf-8";
+/* CSS Document */
+body{background-color:#fff;}
+.d1{max-width:450px; word-break:break-all; word-wrap:break-word;}
+.d2{max-width:395px; word-break:break-all; word-wrap:break-word;}
+
+#t1{width:500px; background-color:#FCCDCE;}
+
+.l1 .li{
+	width:25px;
+	height:25px;
+	border-radius:25px;
+	float:left;
+	}
+.l1 .ls{
+	background-color:#D8D8D8;
+	border-radius:5px;
+	padding:5px;
+	float:left;
+	margin-left:-1px;
+	}
+.l1 .ld{
+	float:left;
+	margin-top:7px;
+	width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-right: 8px solid #D8D8D8;
+    border-bottom: 5px solid transparent;
+	}
+
+.r1{text-align:right;}
+.r1 .ri{
+	width:25px;
+	height:25px;
+	border-radius:25px;
+	float:right;
+	}
+.r1 .rs{
+	background-color:#5CE1B6;
+	border-radius:5px;
+	padding:5px;
+	float:right;
+	}
+.r1 .rd{
+	float:right;
+	margin-top:7px;
+	width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-left: 8px solid #5CE1B6;
+    border-bottom: 5px solid transparent;
+	}
+	
+#t2{width:500px; background-color:#A6F8E2;}
+.l2 .li{
+	width:25px;
+	height:25px;
+	border-radius:25px;
+	float:left;
+	}
+.l2 .ls{
+	background-color:#D8D8D8;
+	min-height:50px;
+	border-radius:5px;
+	padding:5px;
+	float:left;
+	margin-left:-1px;
+	}
+.l2 .ls .li{
+	width:50px;
+	float:left;
+	margin-right:3px;
+	}
+.l2 .ls .ll{
+	float:left;
+	}
+.l2 .ld{
+	float:left;
+	margin-top:7px;
+	width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-right: 8px solid #D8D8D8;
+    border-bottom: 5px solid transparent;
+	}
+
+.r2{text-align:right;}
+.r2 .ri{
+	width:25px;
+	height:25px;
+	border-radius:25px;
+	float:right;
+}
+.r2 .rs{
+	background-color:#5CE1B6;
+	min-height:50px;
+	border-radius:5px;
+	padding:5px;
+	float:right;
+}
+.r2 .rs .ri{
+	width:50px;
+	float:right;
+	margin-left:3px;
+}
+.r2 .rs .rl{
+	float:right;
+}
+.r2 .rd{
+	float:right;
+	margin-top:7px;
+	width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-left: 8px solid #5CE1B6;
+    border-bottom: 5px solid transparent;
+}
+	
+#t3{width:500px; background-color:#FDB2FF;}
+#call{word-break:break-all; word-wrap:break-word;}

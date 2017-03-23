@@ -1,0 +1,29 @@
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <title>Yashi Chat</title>
+        <link rel="stylesheet" type="text/css" href="chatpage/yachat.css" />
+        <script type="text/javascript" src="resources/jquery.min.js"></script>
+        <script type="text/javascript" src="chatpage/strophe.min.js"></script>
+        <script type="text/javascript" src="chatpage/yachat.js"></script>
+    </head>
+    <body>
+        <p>用户名：<input type="text" id="input-jid" value="yashi@uuu.moe"></p>
+        <p>密码：<input type="password" id="input-pwd" value="123698745"></p>
+        <p><button id="btn-login">登录</button></p>
+        <div id="msg"></div>
+        <p>ID: <input type="text" id="input-contacts" value="0wew0@yashi-pc0-os2/Spark"></p>
+        <table id="t2" width="100%" border="0">
+            <tbody>
+            </tbody>
+        </table>
+        <table id="t3" width="100%" border="0">
+        <tbody>
+            <tr><td>
+                <div id="input-msg" contenteditable="true" style="background-color:#fff; width:445px; max-width:445px; float:left; padding:1px; word-wrap:break-word; max-height:100px;outline:none;overflow:auto;"></div>
+                <button id="btn-send">发送</button>
+            </td></tr>
+        </tbody>
+        </table>
+    </body>
+</html>
