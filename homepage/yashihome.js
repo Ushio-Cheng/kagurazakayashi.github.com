@@ -13,7 +13,16 @@ $(document).ready(function(){
             console.error("数据加载失败: "+xhr.status+": "+xhr.statusText);
         }
     });
+    $("#showprivacy").click(function(){
+        showprivacy();
+    });
 });
 $(window).resize(function() {
     nyarukoplayer_resizeendimg();
 });
+function showprivacy() {
+    if ($(".yashiprivacy").length == 0) {
+        $("body").append("<div class='yashiprivacy'></div>");
+        $(".yashiprivacy").load('privacy.html .yashiprivacyw');
+    }
+}

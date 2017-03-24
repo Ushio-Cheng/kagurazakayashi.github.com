@@ -35,6 +35,11 @@ a:active {
 	text-decoration: none;
 	color: #FFFF00;
 }
+.linkbtn {
+    color: #FE99CC;
+	text-decoration: none;
+    cursor: url('../resources/hand.cur'), auto;
+}
 #titlebar {
     position: fixed;
     width: 100%;
@@ -218,6 +223,7 @@ repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2
     padding:10px;
     background-color: #E6E6E6;
     text-align: center;
+    color: #808080;
 }
 #d2 {
     position: absolute;

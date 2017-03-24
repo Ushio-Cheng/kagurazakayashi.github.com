@@ -23,6 +23,9 @@ $(document).ready(function(){
         }
     });
     switchtab();
+    $("#showprivacy").click(function(){
+        showprivacy();
+    });
 });
 function loaddata(data) {
     var contents = $("#contents");
@@ -151,5 +154,11 @@ function switchtab(scrtop = 0) {
     } else {
         juhe.css("background-color","transparent");
         youlian.css("background-color","#cccccc");
+    }
+}
+function showprivacy() {
+    if ($(".yashiprivacy").length == 0) {
+        $("body").append("<div class='yashiprivacy'></div>");
+        $(".yashiprivacy").load('privacy.html .yashiprivacyw');
     }
 }

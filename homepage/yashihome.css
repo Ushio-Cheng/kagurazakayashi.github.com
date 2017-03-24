@@ -14,6 +14,7 @@ body {
     background-size:100px 100px;
     user-select: none;
     color: #FFF;
+    font-family: "思源黑体","Source Han Sans","微软雅黑","Microsoft YaHei","Hiragino Sans GB","STHeiti Light","SimHei";
 }
 a:link {
 	color: #FE99CC;
@@ -31,6 +32,11 @@ a:hover {
 a:active {
 	text-decoration: none;
 	color: #FE99CC;
+}
+.linkbtn {
+    color: #FE99CC;
+	text-decoration: none;
+    cursor: url('../resources/hand.cur'), auto;
 }
 #titlebox {
     font-family: 'webfont';
