@@ -12,7 +12,6 @@ body {
 	background-repeat: no-repeat;
     cursor: url('../resources/Arrow.cur'), auto;
     background-size:100px 100px;
-    user-select: none;
     color: #FFF;
     font-family: "思源黑体","Source Han Sans","微软雅黑","Microsoft YaHei","Hiragino Sans GB","STHeiti Light","SimHei";
 }
@@ -51,8 +50,14 @@ a:active {
     margin: auto;
     background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 }
-#titleimg {
-    width: 300px;
+#title {
+    height: 80px;
+    background: url("../resources/yashititle2.gif") no-repeat center center;
+    background-size: 300px 80px;
+    align-content: center;
+    overflow: hidden;
+    font-size: 38pt;
+    color: transparent;
 }
 .menu {
     position: fixed;
@@ -105,6 +110,7 @@ a:active {
     line-height: 0px;
 }
 #foot {
+    user-select: none;
     position: fixed;
     width: 100%;
     bottom: 0px;

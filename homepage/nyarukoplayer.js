@@ -42,7 +42,7 @@ function nyarukoplayer_init(data) {
             var progress = nyarukoplayer_loaded / nyarukoplayer_count * 100;
             console.log("Loading... "+nyarukoplayer_loaded+"/"+nyarukoplayer_count+" : "+progress+"%");
             var nyarukoplayerloadingok = $("#nyarukoplayerloadingok");
-            nyarukoplayerloadingok.html("Loading..."+progress.toFixed(0)+"%");
+            nyarukoplayerloadingok.html("载入中 "+progress.toFixed(0)+"%");
             nyarukoplayerloadingok.css("width",progress+"%");
             if (nyarukoplayer_loaded == nyarukoplayer_count) {
                 console.log("[yashi nyarukoplayer] Load complete.");
@@ -63,9 +63,13 @@ function nyarukoplayer_init(data) {
         };
         nimg.onerror=function(){
             console.error("加载失败。");
-            $("#nyarukoplayer").html("<br><center>[yashi nyarukoplayer]数据加载失败，请稍后刷新再试。</center>");
+            nyarukoplayer_error();
         };
     });
+}
+function nyarukoplayer_error() {
+    $("#nyarukoplayerloadingok").css({"width":"100%","background-color":"#FF0033","background":"linear-gradient(#FF6666, #FF0033)","text-align":"center"});
+    $("#nyarukoplayerloadingok").html("一些资源加载失败，请稍后刷新再试。");
 }
 function nyarukoplayer_play() {
     var screenwidth = $(window).width();
