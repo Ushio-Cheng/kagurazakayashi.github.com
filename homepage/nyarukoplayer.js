@@ -7,26 +7,12 @@ var nyarukoplayer_time = [];
 var nyarukoplayer_count = 0;
 var nyarukoplayer_loaded = 0;
 var nyarukoplayer_now = 0;
-function nyarukoplayer_audioinit() {
-    var audio = document.getElementById("mp3Btn");
-    var audiodiv = $("#audiodiv");
-    audio.load();
-    audio.pause();
-    audiodiv.click(function(){
-        event.stopPropagation();
-        if(audio.paused)
-        {
-            audiodiv.css("animation","change 2s linear infinite");
-            audio.play();
-            return;
-        }
-        audiodiv.css("animation","none");
-        audio.pause();
-    });
-}
+var nyarukoplayer_lrc = null;
+var nyarukoplayer_cnlrc = true;
 function nyarukoplayer_init(data) {
-    console.log("[Yashi NyarukoPlayer] Loading images...");
     nyarukoplayer_count = data.length;
+    console.log("[Yashi NyarukoPlayer] Config Load complete.");
+    console.log("[Yashi NyarukoPlayer] Loading images...");
     $.each(data, function(i, items) {
         imgurl = "homepage/nyarukoplayer/"+items[0];
         nyarukoplayer_width[i] = items[1];
@@ -93,7 +79,7 @@ function nyarukoplayer_play() {
             nyarukodiv.remove();
             nyarukoplayer_play();
         } else {
-            console.log("[yashi nyarukoplayer] End.");
+            console.log("[Yashi NyarukoPlayer] Animate End.");
             $("#titlebox").css("background","transparent");
         }
     });
@@ -222,4 +208,102 @@ function nyarukoplayer_imgcenter(imgwidth,imgheight,screenwidth,screenheight) {
         }
     }
     return [x,y,w,h];
+}
+function nyarukoplayer_audioinit(lrc) {
+    var audio = document.getElementById("mp3Btn");
+    var audiodiv = $("#audiodiv");
+    audio.load();
+    audio.pause();
+    audiodiv.click(function(){
+        event.stopPropagation();
+        if(audio.paused)
+        {
+            audiodiv.css("animation","change 2s linear infinite");
+            audio.play();
+            return;
+        }
+        audiodiv.css("animation","none");
+        audio.pause();
+    });
+    if (lrc) {
+        var lines = lrc.split('\n');
+        var pattern = /\[\d{2}:\d{2}.\d{2}\]/g;
+        var result = [];
+        while (!pattern.test(lines[0])) {    
+            lineslines = lines.slice(1);
+        };
+        lines[lines.length - 1].length === 0 && lines.pop();
+        lines.forEach(function(v, i, a) {
+            var time = v.match(pattern);
+            var value = v.replace(pattern, '');
+            time.forEach(function(v1, i1, a1) {
+                var t = v1.slice(1, -1).split(':');
+                result.push([parseInt(t[0], 10) * 60 + parseFloat(t[1]), value]);
+            });
+        });
+        // result.sort(function(a, b) {
+        //     nyarukoplayer_lrc = a[0] - b[0];
+        // });
+        // nyarukoplayer_lrc = result;
+        var mi = 0;
+        var mlen = result.length;
+        var mj, md;
+        for (; mi < mlen; mi++) {
+            for (mj = 0; mj < mlen; mj++) {
+                if (result[mi][0] < result[mj][0]) {
+                    md = result[mj];
+                    result[mj] = result[mi];
+                    result[mi] = md;
+                }
+            }
+        }
+        nyarukoplayer_lrc = [];
+        for(var i = 0; i < result.length; i++){
+            var lang = result[i][1];
+            if (lang == "") {
+                lang = ["　","　"];
+            } else {
+                lang = lang.split('|');
+            }
+            //console.log(result[i][0]+" : "+result[i][1]);
+            nyarukoplayer_lrc[i] = [result[i][0],lang[0],lang[1]];
+            // li=$('<li>'+nyarukoplayer_lrc[i][1]+'</li>');
+            // $('#gc ul').append(li);
+        }
+        audio.ontimeupdate = function() {
+            for (var i = 0, l = nyarukoplayer_lrc.length; i < l; i++) {
+                if (this.currentTime > nyarukoplayer_lrc[i][0]) {
+                    //$("#lrc").html(this.currentTime+">"+nyarukoplayer_lrc[i][0]);
+                    var nowlrc = "";
+                    if (nyarukoplayer_cnlrc) {
+                        nowlrc = nyarukoplayer_lrc[i][2];
+                    } else {
+                        nowlrc = nyarukoplayer_lrc[i][1];
+                    }
+                    if (nowlrc == "END") {
+                        nyarukoplayer_musicend = true;
+                        nowlrc = "";
+                        console.log("[Yashi NyarukoPlayer] LRC End.");
+                    }
+                    if ($("#lrc").html() != nowlrc) {
+                        var lrcdiv = $("#lrc");
+                        // lrcdiv.css("alpha",0);
+                        // lrcdiv.animate({"alpha":1},0.5,function(){
+                        // });
+                        lrcdiv.html(nowlrc);
+                        //lrcdiv.html("["+this.currentTime+"]["+nyarukoplayer_lrc[i][0]+"]["+i+"]"+nowlrc);
+                    }
+                }
+            }
+        }
+        $("#lrc").click(function(){
+            nyarukoplayer_cnlrc = !nyarukoplayer_cnlrc;
+            if (nyarukoplayer_cnlrc) {
+                $(this).html("(切换为中文歌词...)");
+            } else {
+                $(this).html("(切换为原版歌词...)");
+            }
+        });
+        console.log("[Yashi NyarukoPlayer] LRC Load complete.");
+    }
 }

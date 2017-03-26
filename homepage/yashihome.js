@@ -1,5 +1,11 @@
 $(document).ready(function(){
-    nyarukoplayer_audioinit();
+    $.ajax({
+        url: "homepage/nyarukoplayer/nyaruko.lrc",
+        dataType: 'text',
+        success: function(data) {
+            nyarukoplayer_audioinit(data);
+        }
+    });
     try {
         $.ajaxSetup({
             error: function (x, e) {
