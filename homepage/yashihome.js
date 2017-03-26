@@ -1,11 +1,4 @@
 $(document).ready(function(){
-    $.ajax({
-        url: "homepage/nyarukoplayer/nyaruko.lrc",
-        dataType: 'text',
-        success: function(data) {
-            nyarukoplayer_audioinit(data);
-        }
-    });
     try {
         $.ajaxSetup({
             error: function (x, e) {
@@ -30,10 +23,20 @@ $(document).ready(function(){
         $("#showprivacy").click(function(){
             showprivacy();
         });
+        $("#disablemedia").click(function(){
+            disablemedia();
+        });
     } catch (ex) {
         console.error("数据加载失败: "+ex);
         nyarukoplayer_error();
     }
+    $.ajax({
+        url: "homepage/nyarukoplayer/nyaruko.lrc",
+        dataType: 'text',
+        success: function(data) {
+            nyarukoplayer_audioinit(data);
+        }
+    });
 });
 $(window).resize(function() {
     nyarukoplayer_resizeendimg();
@@ -42,5 +45,12 @@ function showprivacy() {
     if ($(".yashiprivacy").length == 0) {
         $("body").append("<div class='yashiprivacy'></div>");
         $(".yashiprivacy").load('privacy.html .yashiprivacyw');
+    }
+}
+function disablemedia() {
+    if ($.cookie("disable") == "true") {
+        nyarukoplayer_disable(false);
+    } else {
+        nyarukoplayer_disable(true);
     }
 }
