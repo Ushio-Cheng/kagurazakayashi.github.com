@@ -58,6 +58,7 @@ a:active {
     overflow: hidden;
     font-size: 38pt;
     color: transparent;
+    line-height: 80px;
 }
 .menu {
     position: fixed;

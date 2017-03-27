@@ -54,3 +54,11 @@ function disablemedia() {
         nyarukoplayer_disable(true);
     }
 }
+document.addEventListener("visibilitychange", function () {
+    if (document.hidden) {
+        nyarukoplayer_titlelrc = true;
+    } else  {
+        nyarukoplayer_titlelrc = false;
+        document.title = "神楽坂雅詩的个人网站 - 神楽坂雅詩的小世界";
+    }
+}, false);

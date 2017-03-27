@@ -1,3 +1,55 @@
+/* Yashi NyarukoPlayer 
+                   ,;;77;
+                 ...     7
+            .;;;,       7D
+          .7;.          S
+         ::           ;3;.,.
+       ..        ..;:;T;,;;;;, :.
+      :.       ,,,77TJ:,::;:;: .,,.               .
+     :        JY.;;Y;;:::;;;.  ..:;.             ..
+    :        Jh;.:J;.,7:;;:   ..:,;;            ...
+   :.       .3J7,7;.,:;;.:,::;..;;:;:           ::
+  .,        cT;;JY;.:;:7,;7:;;;.;;:;;         ..:;...
+  :        .C;7vU17.:7;Y:777;:7,:7::;.     ..:..:. ..,.
+  .       . YJU77;Y,7c7;Y:..c;Y:;J;.;.    : .:,.:..   7::
+            xhTT7C97v7,.TTGZv7v:YJ7;;;       ..;:::. .7; ;
+,          .7xuH7 @7.   .7@@c;,;E77777;      .:,,.,;7;v, ,
+:            :H1T  .      7: ..;7Tc7777v777Ic,:: 7;, ;7 .:
+;             EYh           ,.7vGhh3c7;;;;7;..: ,;.,TT;.,
+,            T7:CT.  ;;;   ::I@@R37UC3c77v: .,  ;::7;.:
+:           :J .UUT;;  .  uH;@b    .7I1SS. .,. 7T77;.
+;          .7  7IY ;@@BH:@B.@R   .:T.  .. ... :CJcJc7;:::.
+.     .   .;.  v;.  @@BJYR Y@c .:.Z;  . .... .T7vcITTcc;;;7
+          ;        :Z;;T;,:@Bu..;;JY      ...Tv;,  .;YUI7;;c
+  IYYcvc;::  .;;. ;H,:TT:.J3@B, :. ;.:7;77YYIvJv7;.   ,.:;;;.
+ .b  .,:v;:;::GE7cZuc;bR.7 ;b@U  :. ,YcYJJTJ;cYcJYcv.     77.
+ :Y    ;.     ;  777;1@;:Y77u@b  : ;bHG7;;;;  .7TJ77Y;. .  c:
+  .   ;c      ;: 37:@@b.ZSx7;@@D.  YY  ,.,,;7;  .777;77;   7;
+     .;;       7 ;, ;cx,@YJ ;;CB@H.;Zv7IHUGZ;77    ;7;777  ;;
+     ;..;      ,;      ;RT.,c.ZG6B6bB@@@bB@GU777    ;Y;77: ;
+     ;: v;.     .:,   :: G1U@@BEb7x@6h0b9GDC, :;7    ;;,cc;
+      ;  ..       .:,,;; ;@@bbb@bB1YDDHbRBB6T  ;v;    ; ;;7
+      .,             E@.b@B6R9b@Y7;,uRE6bBBb@@@REbh  .. ; 7.
+                   :;@@,;@b99Rb@;  .:@60bb;   .  T@3    7 7.
+                ... 0;bT Yb696@RU;..ERGubb7c      S7   ;, :
+             .,,     7BB;7669b;  ;T;UR3SR@.TTb    ;.   .
+            ,.       .;Y@3Bb9DUvhB@CG096@J ;U7   ..
+           .        .  7J.@bRbBBbR@@@Rb@ 7:YU@
+         .:     ..;;;;;:;vI;@HBBBDb@xR@.:U 6;T
+        :;,..:;;;;:::...   .E;u07@S7TC,;B.76
+        .;;;;;;.  .        3@    x7 RI YR
+           .               G:      :
+                                  .;  .
+                                  .;...
+                                   ;; .
+                                   ;:.
+                                   ;:.
+                                  ::
+                                 ;;;
+                                ;;;;
+                              ,;:7:
+                              RS7
+*/
 var nyarukoplayer_imgcache = [];
 var nyarukoplayer_from = [];
 var nyarukoplayer_to = [];
@@ -8,9 +60,12 @@ var nyarukoplayer_count = 0;
 var nyarukoplayer_loaded = 0;
 var nyarukoplayer_now = 0;
 var nyarukoplayer_lrc = null;
-var nyarukoplayer_cnlrc = true;
-var nyarukoplayer_lrctime = 1; //偏移时间
+var nyarukoplayer_cnlrc = true; //可设定：初始字幕语言
+var nyarukoplayer_lrctime = 1; //可设定：偏移时间
+var nyarukoplayer_titlelrc = false; //可设定：标题栏歌词
+var nyarukoplayer_consolelog = false; //可设定：在控制台输出信息
 function nyarukoplayer_init(data) {
+    console.log("[nyarukoplayer.js] Powered by KagurazakaYashi");
     if ($.cookie("disable") == "true") {
         console.warn("[Yashi NyarukoPlayer] Disabled by user.");
         $("#nyarukoplayerloading").remove();
@@ -18,8 +73,8 @@ function nyarukoplayer_init(data) {
         return;
     }
     nyarukoplayer_count = data.length;
-    console.log("[Yashi NyarukoPlayer] Config Load complete.");
-    console.log("[Yashi NyarukoPlayer] Loading images...");
+    if (nyarukoplayer_consolelog) console.log("[Yashi NyarukoPlayer] Config Load complete.");
+    if (nyarukoplayer_consolelog) console.log("[Yashi NyarukoPlayer] Loading images...");
     $.each(data, function(i, items) {
         imgurl = "homepage/nyarukoplayer/"+items[0];
         nyarukoplayer_width[i] = items[1];
@@ -33,16 +88,16 @@ function nyarukoplayer_init(data) {
             nyarukoplayer_imgcache[i] = $(this);
             nyarukoplayer_loaded++;
             var progress = nyarukoplayer_loaded / nyarukoplayer_count * 100;
-            console.log("Loading... "+nyarukoplayer_loaded+"/"+nyarukoplayer_count+" : "+progress+"%");
+            if (nyarukoplayer_consolelog) console.log("Loading... "+nyarukoplayer_loaded+"/"+nyarukoplayer_count+" : "+progress+"%");
             var nyarukoplayerloadingok = $("#nyarukoplayerloadingok");
             nyarukoplayerloadingok.html("载入中 "+progress.toFixed(0)+"%");
             nyarukoplayerloadingok.css("width",progress+"%");
             if (nyarukoplayer_loaded == nyarukoplayer_count) {
-                console.log("[Yashi NyarukoPlayer] Load complete.");
+                if (nyarukoplayer_consolelog) console.log("[Yashi NyarukoPlayer] Load complete.");
                 if ($("#audiodiv").length != 0 && $("mp3Btn") != 0) {
                     $("#audiodiv").css("background","url('resources/btn_audio.png') no-repeat");
                     if (!!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
-                        console.log("[Yashi NyarukoPlayer] 检测到iOS,不自动播放。");
+                        if (nyarukoplayer_consolelog) console.log("[Yashi NyarukoPlayer] 检测到iOS,不自动播放。");
                     } else {
                         $("#audiodiv").css("animation","change 2s linear infinite");
                         document.getElementById("mp3Btn").play();
@@ -86,13 +141,13 @@ function nyarukoplayer_play() {
     var ntocss = nyarukoplayer_frame(nto,imgwidth,imgheight,screenwidth,screenheight);
     nyarukodiv.css({"left":nfromcss[0],"top":nfromcss[1],"width":nfromcss[2],"height":nfromcss[3]});
     nyarukodiv.animate({"left":ntocss[0],"top":ntocss[1],"width":ntocss[2],"height":ntocss[3]},ntime,function(){
-        console.log("[Yashi NyarukoPlayer] "+(nyarukoplayer_now+1)+"/"+nyarukoplayer_count);
+        if (nyarukoplayer_consolelog) console.log("[Yashi NyarukoPlayer] "+(nyarukoplayer_now+1)+"/"+nyarukoplayer_count);
         if (nyarukoplayer_now < nyarukoplayer_count-1) {
             nyarukoplayer_now++;
             nyarukodiv.remove();
             nyarukoplayer_play();
         } else {
-            console.log("[Yashi NyarukoPlayer] Animate End.");
+            if (nyarukoplayer_consolelog) console.log("[Yashi NyarukoPlayer] Animate End.");
             $("#titlebox").css("background","transparent");
         }
     });
@@ -157,7 +212,7 @@ function nyarukoplayer_frame(position,imgwidth,imgheight,screenwidth,screenheigh
             y = (screenheight - h)/2;
         }
     }
-    console.log(x+","+y+","+w+","+h+","+imgwh);
+    if (nyarukoplayer_consolelog) console.log(x+","+y+","+w+","+h+","+imgwh);
     return [x,y,w,h];
 }
 function nyarukoplayer_resizeendimg() {
@@ -170,7 +225,7 @@ function nyarukoplayer_resizeendimg() {
     y = ccss[1];
     w = ccss[2];
     h = ccss[3];
-    // console.log(cw+","+ch+","+screenwidth+","+imgwidth+","+screenheight+","+imgheight+","+imgwh+","+(cw/ch));
+    // if (nyarukoplayer_consolelog) console.log(cw+","+ch+","+screenwidth+","+imgwidth+","+screenheight+","+imgheight+","+imgwh+","+(cw/ch));
     $(".nyarukodiv").css({"left":x,"top":y,"width":w,"height":h});
 }
 function nyarukoplayer_imgcenter(imgwidth,imgheight,screenwidth,screenheight) {
@@ -224,11 +279,11 @@ function nyarukoplayer_imgcenter(imgwidth,imgheight,screenwidth,screenheight) {
 }
 function nyarukoplayer_audioinit(lrc) {
     if ($.cookie("disable") == "true") {
-        console.log("[Yashi NyarukoPlayer] Disabled by user.");
+        if (nyarukoplayer_consolelog) console.log("[Yashi NyarukoPlayer] Disabled by user.");
         return;
     }
     var lang = navigator.language.substr(0,2);
-    if (lang == "ja" && $.cookie('nochkarea') != 'true') { //内容限制
+    if (lang == "ja" && $.cookie('nochkarea') != 'true') { //可设定：内容限制
         console.warn("[Yashi NyarukoPlayer] このページはお住まいの地域からご利用になれません Cannot use this page from the area to live");
         $("#audiodiv").remove();
         return;
@@ -290,7 +345,7 @@ function nyarukoplayer_audioinit(lrc) {
             } else {
                 lang = lang.split('|');
             }
-            //console.log(result[i][0]+" : "+result[i][1]);
+            //if (nyarukoplayer_consolelog) console.log(result[i][0]+" : "+result[i][1]);
             nyarukoplayer_lrc[i] = [result[i][0]+nyarukoplayer_lrctime,lang[0],lang[1]];
             // li=$('<li>'+nyarukoplayer_lrc[i][1]+'</li>');
             // $('#gc ul').append(li);
@@ -308,7 +363,7 @@ function nyarukoplayer_audioinit(lrc) {
                     if (nowlrc == "END") {
                         nyarukoplayer_musicend = true;
                         nowlrc = "";
-                        console.log("[Yashi NyarukoPlayer] LRC End.");
+                        if (nyarukoplayer_consolelog) console.log("[Yashi NyarukoPlayer] LRC End.");
                     }
                     if ($("#lrc").html() != nowlrc) {
                         var lrcdiv = $("#lrc");
@@ -316,6 +371,9 @@ function nyarukoplayer_audioinit(lrc) {
                         // lrcdiv.animate({"alpha":1},0.5,function(){
                         // });
                         lrcdiv.html(nowlrc);
+                        if (nyarukoplayer_titlelrc) {
+                            document.title = "♪" + nowlrc;
+                        }
                         //lrcdiv.html("["+this.currentTime+"]["+nyarukoplayer_lrc[i][0]+"]["+i+"]"+nowlrc);
                     }
                 }
@@ -329,7 +387,7 @@ function nyarukoplayer_audioinit(lrc) {
                 $(this).html("(切换为原版歌词...)");
             }
         });
-        console.log("[Yashi NyarukoPlayer] LRC Load complete.");
+        if (nyarukoplayer_consolelog) console.log("[Yashi NyarukoPlayer] LRC Load complete.");
     }
 }
 function nyarukoplayer_nochkarea(val = false) {
