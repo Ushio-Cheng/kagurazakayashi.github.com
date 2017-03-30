@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'webfont';
+  src: url('webfont.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
 body {
 	margin-left: 0px;
 	margin-top: 0px;
@@ -6,12 +12,13 @@ body {
   background: #000;
   overflow: hidden;
   font-family: 'webfont';
-  font-size: 12pt;
+  font-size: 10pt;
   color: #FFF;
 }
 a:link {
 	color: #FE99CC;
 	text-decoration: none;
+    cursor: url
 }
 a:visited {
 	text-decoration: none;
@@ -25,7 +32,6 @@ a:active {
 	text-decoration: none;
 	color: #FFFF00;
 }
-
 canvas {
   bottom: 0;
   left: 0;
@@ -43,18 +49,11 @@ canvas {
   background: #000;
 }
 
-@font-face {
-  font-family: 'webfont';
-  src: url('webfont.ttf');
-  font-weight: normal;
-  font-style: normal;
-}
-
 #info {
   position: fixed;
   background: rgba(0, 0, 0, 0.5);
-  width: 320px;
-  height: 95px;
+  width: 80%;
+  height: 300px;
   padding-top: 15px;
   text-align: center;
   left: 0;
