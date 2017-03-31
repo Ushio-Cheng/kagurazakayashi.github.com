@@ -68,7 +68,7 @@ function nyarukoplayer_init(data) {
     console.log("[nyarukoplayer.js] Powered by KagurazakaYashi");
     if ($.cookie("disable") == "true") {
         console.warn("[Yashi NyarukoPlayer] Disabled by user.");
-        $("#nyarukoplayerloading").remove();
+        $("#nyarukoplayer_loading").remove();
         $("#titlebox").css("background","transparent");
         return;
     }
@@ -89,28 +89,25 @@ function nyarukoplayer_init(data) {
             nyarukoplayer_loaded++;
             var progress = nyarukoplayer_loaded / nyarukoplayer_count * 100;
             if (nyarukoplayer_consolelog) console.log("Loading... "+nyarukoplayer_loaded+"/"+nyarukoplayer_count+" : "+progress+"%");
-            var nyarukoplayerloadingok = $("#nyarukoplayerloadingok");
-            nyarukoplayerloadingok.html("载入中 "+progress.toFixed(0)+"%");
-            nyarukoplayerloadingok.css("width",progress+"%");
+            var nyarukoplayer_loadingok = $("#nyarukoplayer_loadingok");
+            nyarukoplayer_loadingok.html("载入中 "+progress.toFixed(0)+"%");
+            nyarukoplayer_loadingok.css("width",progress+"%");
             if (nyarukoplayer_loaded == nyarukoplayer_count) {
                 if (nyarukoplayer_consolelog) console.log("[Yashi NyarukoPlayer] Load complete.");
-                if ($("#audiodiv").length != 0 && $("mp3Btn") != 0) {
-                    $("#audiodiv").css("background","url('resources/btn_audio.png') no-repeat");
-                    if (!!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
-                        if (nyarukoplayer_consolelog) console.log("[Yashi NyarukoPlayer] 检测到iOS,不自动播放。");
-                    } else {
-                        $("#audiodiv").css("animation","change 2s linear infinite");
-                        document.getElementById("mp3Btn").play();
-                    }
+                if ($("#nyarukoplayer_audiodiv").length != 0 && $("#nyarukoplayer_musiccontrol") != 0) {
+                    $("#nyarukoplayer_audiodiv").css("background","url('resources/btn_audio.png') no-repeat");
+                    //仅手机提示是否播放音乐
+                    // if (jQuery.browser.mobile) {
+                    //     musicdiglog_open();
+                    // } else {
+                    //     nyarukoplayer_playmusic(true);
+                    //     nyarukoplayer_ready();
+                    // }
+                    //全部提示
+                    musicdiglog_open();
                 } else {
                     console.error("[Yashi NyarukoPlayer] 没有导入相关div或 播放地区/语言限制，无法播放音频。");
-                }
-                $("#nyarukoplayerloading").remove();
-                if ($("#nyarukoplayer") != 0) {
-                    nyarukoplayer_play();
-                } else {
-                    console.error("[Yashi NyarukoPlayer] 没有导入相关div，无法播放动画。");
-                    $("#titlebox").css("background","transparent");
+                    nyarukoplayer_ready();
                 }
             }
         };
@@ -120,9 +117,27 @@ function nyarukoplayer_init(data) {
         };
     });
 }
+function nyarukoplayer_ready() {
+    $("#nyarukoplayer_loading").remove();
+    if ($("#nyarukoplayer") != 0) {
+        nyarukoplayer_play();
+    } else {
+        console.error("[Yashi NyarukoPlayer] 没有导入相关div，无法播放动画。");
+        $("#titlebox").css("background","transparent");
+    }
+}
+function nyarukoplayer_playmusic(play) {
+    if (play) {
+        $("#nyarukoplayer_audiodiv").css("animation","change 2s linear infinite");
+        document.getElementById("nyarukoplayer_musiccontrol").play();
+    } else {
+        $("#nyarukoplayer_audiodiv").css("animation","none");
+        document.getElementById("nyarukoplayer_musiccontrol").pause();
+    }
+}
 function nyarukoplayer_error() {
-    $("#nyarukoplayerloadingok").css({"width":"100%","background-color":"#FF0033","background":"linear-gradient(#FF6666, #FF0033)","text-align":"center"});
-    $("#nyarukoplayerloadingok").html("一些资源加载失败，请稍后刷新再试。");
+    $("#nyarukoplayer_loadingok").css({"width":"100%","background-color":"#FF0033","background":"linear-gradient(#FF6666, #FF0033)","text-align":"center"});
+    $("#nyarukoplayer_loadingok").html("一些资源加载失败，请稍后刷新再试。");
     $("#titlebox").css("background","transparent");
 }
 function nyarukoplayer_play() {
@@ -285,25 +300,23 @@ function nyarukoplayer_audioinit(lrc) {
     var lang = navigator.language.substr(0,2);
     if (lang == "ja" && $.cookie('nochkarea') != 'true') { //可设定：内容限制
         console.warn("[Yashi NyarukoPlayer] このページはお住まいの地域からご利用になれません Cannot use this page from the area to live");
-        $("#audiodiv").remove();
+        $("#nyarukoplayer_audiodiv").remove();
         return;
     }
-    $("#mp3Btn").html('<source src="homepage/nyarukoplayer/nyaruko.mp3" />');
-    var audio = document.getElementById("mp3Btn");
-    var audiodiv = $("#audiodiv");
+    $("#nyarukoplayer_musiccontrol").html('<source src="homepage/nyarukoplayer/nyaruko.mp3" />');
+    var audio = document.getElementById("nyarukoplayer_musiccontrol");
+    var audiodiv = $("#nyarukoplayer_audiodiv");
     audio.load();
     audio.pause();
     audiodiv.click(function(){
         event.stopPropagation();
         if(audio.paused)
         {
-            audiodiv.css("animation","change 2s linear infinite");
-            audio.play();
+            nyarukoplayer_playmusic(true);
             return;
         }
-        audiodiv.css("animation","none");
-        audio.pause();
-        $("#lrc").html("");
+        nyarukoplayer_playmusic(false);
+        $("#nyarukoplayer_lrc").html("");
     });
     if (lrc) {
         var lines = lrc.split('\n');
@@ -353,7 +366,7 @@ function nyarukoplayer_audioinit(lrc) {
         audio.ontimeupdate = function() {
             for (var i = 0, l = nyarukoplayer_lrc.length; i < l; i++) {
                 if (this.currentTime > nyarukoplayer_lrc[i][0]) {
-                    //$("#lrc").html(this.currentTime+">"+nyarukoplayer_lrc[i][0]);
+                    //$("#nyarukoplayer_lrc").html(this.currentTime+">"+nyarukoplayer_lrc[i][0]);
                     var nowlrc = "";
                     if (nyarukoplayer_cnlrc) {
                         nowlrc = nyarukoplayer_lrc[i][2];
@@ -365,8 +378,8 @@ function nyarukoplayer_audioinit(lrc) {
                         nowlrc = "";
                         if (nyarukoplayer_consolelog) console.log("[Yashi NyarukoPlayer] LRC End.");
                     }
-                    if ($("#lrc").html() != nowlrc) {
-                        var lrcdiv = $("#lrc");
+                    if ($("#nyarukoplayer_lrc").html() != nowlrc) {
+                        var lrcdiv = $("#nyarukoplayer_lrc");
                         // lrcdiv.css("alpha",0);
                         // lrcdiv.animate({"alpha":1},0.5,function(){
                         // });
@@ -379,7 +392,7 @@ function nyarukoplayer_audioinit(lrc) {
                 }
             }
         }
-        $("#lrc").click(function(){
+        $("#nyarukoplayer_lrc").click(function(){
             nyarukoplayer_cnlrc = !nyarukoplayer_cnlrc;
             if (nyarukoplayer_cnlrc) {
                 $(this).html("(切换为中文歌词...)");
@@ -397,4 +410,16 @@ function nyarukoplayer_nochkarea(val = false) {
 function nyarukoplayer_disable(val = false) {
     $.cookie('disable', val, { expires: 365 });
     location.reload(false);
+}
+function musicdiglog_open() {
+    $("body").append('<div id="nyarukoplayer_musicdiglog"><h1>要开启背景音乐吗？</h1><p><a id="nyarukoplayer_musicdiglog_yes">播放(推荐)</a></p><p><a id="nyarukoplayer_musicdiglog_no">不要播放</a></p></div>');
+    $("#nyarukoplayer_musicdiglog_yes").click(function(){
+        nyarukoplayer_playmusic(true);
+        $("#nyarukoplayer_musicdiglog").remove();
+        nyarukoplayer_ready();
+    });
+    $("#nyarukoplayer_musicdiglog_no").click(function(){
+        $("#nyarukoplayer_musicdiglog").remove();
+        nyarukoplayer_ready();
+    });
 }
