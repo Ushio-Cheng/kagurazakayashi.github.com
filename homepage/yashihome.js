@@ -7,7 +7,7 @@ $(document).ready(function(){
                 return false;
             }
         });
-        $.getJSON("homepage/nyarukoplayer/nyaruko.json",function(responseTxt,statusTxt,xhr,data){
+        $.getJSON(nyarukoplayer_conffile,function(responseTxt,statusTxt,xhr,data){
             if(statusTxt == "error") {
                 console.error("数据加载失败: "+xhr.status+": "+xhr.statusText);
                 nyarukoplayer_error();
@@ -23,15 +23,15 @@ $(document).ready(function(){
         $("#showprivacy").click(function(){
             showprivacy();
         });
-        $("#disablemedia").click(function(){
-            disablemedia();
-        });
+        // $("#disablemedia").click(function(){
+        //     disablemedia();
+        // });
     } catch (ex) {
         console.error("数据加载失败: "+ex);
         nyarukoplayer_error();
     }
     $.ajax({
-        url: "homepage/nyarukoplayer/nyaruko.lrc",
+        url: nyarukoplayer_lrcfile,
         dataType: 'text',
         success: function(data) {
             nyarukoplayer_audioinit(data);

@@ -50,6 +50,25 @@
                               ,;:7:
                               RS7
 */
+//PUBLIC: 以下变量根据需要调整
+//初始歌词语言
+var nyarukoplayer_cnlrc = true;
+//歌词偏移时间
+var nyarukoplayer_lrctime = 1;
+//标题栏歌词
+var nyarukoplayer_titlelrc = false;
+//在控制台输出信息
+var nyarukoplayer_consolelog = false;
+//图片路径,支持相对绝对URL路径
+var nyarukoplayer_imgdir = "https://www.yoooooooooo.com/yashi/homepage/nyarukoplayer/";
+//音乐按钮图片路径
+var nyarukoplayer_musicbtnimg = "https://www.yoooooooooo.com/yashi/resources/btn_audio.png";
+//配置文件路径,需要在外部自行下载,使用 nyarukoplayer_init(JSON) 导入.
+var nyarukoplayer_conffile = "https://www.yoooooooooo.com/yashi/homepage/nyarukoplayer/nyaruko.json";
+//歌词文件路径,需要在外部自行下载,使用 nyarukoplayer_audioinit(TEXT) 导入.
+var nyarukoplayer_lrcfile = "https://www.yoooooooooo.com/yashi/homepage/nyarukoplayer/nyaruko.lrc";
+
+//PRIVATE:
 var nyarukoplayer_imgcache = [];
 var nyarukoplayer_from = [];
 var nyarukoplayer_to = [];
@@ -60,10 +79,6 @@ var nyarukoplayer_count = 0;
 var nyarukoplayer_loaded = 0;
 var nyarukoplayer_now = 0;
 var nyarukoplayer_lrc = null;
-var nyarukoplayer_cnlrc = true; //可设定：初始字幕语言
-var nyarukoplayer_lrctime = 1; //可设定：偏移时间
-var nyarukoplayer_titlelrc = false; //可设定：标题栏歌词
-var nyarukoplayer_consolelog = false; //可设定：在控制台输出信息
 function nyarukoplayer_init(data) {
     console.log("[nyarukoplayer.js] Powered by KagurazakaYashi");
     if ($.cookie("disable") == "true") {
@@ -76,7 +91,7 @@ function nyarukoplayer_init(data) {
     if (nyarukoplayer_consolelog) console.log("[Yashi NyarukoPlayer] Config Load complete.");
     if (nyarukoplayer_consolelog) console.log("[Yashi NyarukoPlayer] Loading images...");
     $.each(data, function(i, items) {
-        imgurl = "homepage/nyarukoplayer/"+items[0];
+        imgurl = nyarukoplayer_imgdir+items[0];
         nyarukoplayer_width[i] = items[1];
         nyarukoplayer_height[i] = items[2];
         nyarukoplayer_from[i] = items[3];
@@ -95,7 +110,7 @@ function nyarukoplayer_init(data) {
             if (nyarukoplayer_loaded == nyarukoplayer_count) {
                 if (nyarukoplayer_consolelog) console.log("[Yashi NyarukoPlayer] Load complete.");
                 if ($("#nyarukoplayer_audiodiv").length != 0 && $("#nyarukoplayer_musiccontrol") != 0) {
-                    $("#nyarukoplayer_audiodiv").css("background","url('resources/btn_audio.png') no-repeat");
+                    $("#nyarukoplayer_audiodiv").css("background","url('"+nyarukoplayer_musicbtnimg+"') no-repeat");
                     //仅手机提示是否播放音乐
                     // if (jQuery.browser.mobile) {
                     //     musicdiglog_open();
@@ -412,14 +427,29 @@ function nyarukoplayer_disable(val = false) {
     location.reload(false);
 }
 function musicdiglog_open() {
-    $("body").append('<div id="nyarukoplayer_musicdiglog"><h1>要开启背景音乐吗？</h1><p><a id="nyarukoplayer_musicdiglog_yes">播放(推荐)</a></p><p><a id="nyarukoplayer_musicdiglog_no">不要播放</a></p></div>');
-    $("#nyarukoplayer_musicdiglog_yes").click(function(){
+    if ($.cookie('playmusic') == "1") {
         nyarukoplayer_playmusic(true);
         $("#nyarukoplayer_musicdiglog").remove();
         nyarukoplayer_ready();
-    });
-    $("#nyarukoplayer_musicdiglog_no").click(function(){
+    } else if ($.cookie('playmusic') == "2") {
         $("#nyarukoplayer_musicdiglog").remove();
         nyarukoplayer_ready();
-    });
+    } else {
+        $("body").append('<div id="nyarukoplayer_musicdiglog"><h1>要开启背景音乐吗？</h1><p><a id="nyarukoplayer_musicdiglog_yes">播放(推荐)</a></p><p><a id="nyarukoplayer_musicdiglog_no">不要播放</a></p><p><input type="checkbox" id="nyarukoplayer_musicdiglog_save" value="1" checked="checked" />今日不再询问</p></div>');
+        $("#nyarukoplayer_musicdiglog_yes").click(function(){
+            if ($("#nyarukoplayer_musicdiglog_save").prop("checked")) {
+                $.cookie('playmusic', "1", { expires: 1 });
+            }
+            nyarukoplayer_playmusic(true);
+            $("#nyarukoplayer_musicdiglog").remove();
+            nyarukoplayer_ready();
+        });
+        $("#nyarukoplayer_musicdiglog_no").click(function(){
+            if ($("#nyarukoplayer_musicdiglog_save").prop("checked")) {
+                $.cookie('playmusic', "2", { expires: 1 });
+            }
+            $("#nyarukoplayer_musicdiglog").remove();
+            nyarukoplayer_ready();
+        });
+    }
 }
