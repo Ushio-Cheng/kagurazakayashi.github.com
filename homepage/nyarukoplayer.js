@@ -444,17 +444,23 @@ function nyarukoplayer_disable(val = false) {
     location.reload(false);
 }
 function nyarukoplayer_musicdiglog_open() {
-    if ($.cookie('playmusic') == "1") {
+    var isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+    if (!isiOS && $.cookie('playmusic') == "1") {
         nyarukoplayer_playmusic(true);
         $("#nyarukoplayer_musicdiglog").remove();
         nyarukoplayer_ready();
-    } else if ($.cookie('playmusic') == "2") {
+    } else if (!isiOS && $.cookie('playmusic') == "2") {
         $("#nyarukoplayer_musicdiglog").remove();
         nyarukoplayer_ready();
     } else {
-        $("body").append('<div id="nyarukoplayer_musicdiglog"><h1>要开启背景音乐吗？</h1><p><a id="nyarukoplayer_musicdiglog_yes">播放(推荐)</a></p><p><a id="nyarukoplayer_musicdiglog_no">不要播放</a></p><p><input type="checkbox" id="nyarukoplayer_musicdiglog_save" value="1" checked="checked" />今日不再询问</p></div>');
+        var bodyhtml = '<div id="nyarukoplayer_musicdiglog"><h1>要开启背景音乐吗？</h1><p><a id="nyarukoplayer_musicdiglog_yes">播放(推荐)</a></p><p><a id="nyarukoplayer_musicdiglog_no">不要播放</a></p>';
+        if (!isiOS) {
+            bodyhtml = bodyhtml + '<p><input type="checkbox" id="nyarukoplayer_musicdiglog_save" value="1" checked="checked" />今日不再询问</p>';
+        }
+        bodyhtml = bodyhtml + '</div>';
+        $("body").append(bodyhtml);
         $("#nyarukoplayer_musicdiglog_yes").click(function(){
-            if ($("#nyarukoplayer_musicdiglog_save").prop("checked")) {
+            if (!isiOS && $("#nyarukoplayer_musicdiglog_save").prop("checked")) {
                 $.cookie('playmusic', "1", { expires: 1 });
             }
             nyarukoplayer_playmusic(true);
@@ -462,7 +468,7 @@ function nyarukoplayer_musicdiglog_open() {
             nyarukoplayer_ready();
         });
         $("#nyarukoplayer_musicdiglog_no").click(function(){
-            if ($("#nyarukoplayer_musicdiglog_save").prop("checked")) {
+            if (!isiOS && $("#nyarukoplayer_musicdiglog_save").prop("checked")) {
                 $.cookie('playmusic', "2", { expires: 1 });
             }
             $("#nyarukoplayer_musicdiglog").remove();
