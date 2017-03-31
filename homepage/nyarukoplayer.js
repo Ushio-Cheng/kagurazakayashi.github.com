@@ -49,6 +49,7 @@
                                 ;;;;
                               ,;:7:
                               RS7
+                https://www.yoooooooooo.com/yashi/
 */
 //PUBLIC: 以下变量根据需要调整
 //初始歌词语言
@@ -59,6 +60,10 @@ var nyarukoplayer_lrctime = 1;
 var nyarukoplayer_titlelrc = false;
 //在控制台输出信息
 var nyarukoplayer_consolelog = false;
+//主图片扩展名
+var nyarukoplayer_imgtype = "jpg";
+//WEBP支持
+var nyarukoplayer_webp = true;
 //图片路径,支持相对绝对URL路径
 var nyarukoplayer_imgdir = "https://www.yoooooooooo.com/yashi/homepage/nyarukoplayer/";
 //音乐按钮图片路径
@@ -81,8 +86,15 @@ var nyarukoplayer_count = 0;
 var nyarukoplayer_loaded = 0;
 var nyarukoplayer_now = 0;
 var nyarukoplayer_lrc = null;
+var nyarukoplayer_webpok = false;
 function nyarukoplayer_init(data) {
     console.log("[nyarukoplayer.js] Powered by KagurazakaYashi");
+    var brow = nyarukoplayer_browserok();
+    if (brow != null) {
+        nyarukoplayer_error(brow);
+        return;
+    }
+    nyarukoplayer_webpok = nyarukoplayer_checkWebpSupport();
     if ($.cookie("disable") == "true") {
         console.warn("[Yashi NyarukoPlayer] Disabled by user.");
         $("#nyarukoplayer_loading").remove();
@@ -93,7 +105,10 @@ function nyarukoplayer_init(data) {
     if (nyarukoplayer_consolelog) console.log("[Yashi NyarukoPlayer] Config Load complete.");
     if (nyarukoplayer_consolelog) console.log("[Yashi NyarukoPlayer] Loading images...");
     $.each(data, function(i, items) {
-        imgurl = nyarukoplayer_imgdir+items[0];
+        if (nyarukoplayer_webp && nyarukoplayer_webpok) {
+            nyarukoplayer_imgtype = "webp";
+        }
+        imgurl = nyarukoplayer_imgdir+items[0]+"."+nyarukoplayer_imgtype;
         nyarukoplayer_width[i] = items[1];
         nyarukoplayer_height[i] = items[2];
         nyarukoplayer_from[i] = items[3];
@@ -115,13 +130,13 @@ function nyarukoplayer_init(data) {
                     $("#nyarukoplayer_audiodiv").css("background","url('"+nyarukoplayer_musicbtnimg+"') no-repeat");
                     //仅手机提示是否播放音乐
                     // if (jQuery.browser.mobile) {
-                    //     musicdiglog_open();
+                    //     nyarukoplayer_musicdiglog_open();
                     // } else {
                     //     nyarukoplayer_playmusic(true);
                     //     nyarukoplayer_ready();
                     // }
                     //全部提示
-                    musicdiglog_open();
+                    nyarukoplayer_musicdiglog_open();
                 } else {
                     console.error("[Yashi NyarukoPlayer] 没有导入相关div或 播放地区/语言限制，无法播放音频。");
                     nyarukoplayer_ready();
@@ -130,7 +145,7 @@ function nyarukoplayer_init(data) {
         };
         nimg.onerror=function(){
             console.error("加载失败。");
-            nyarukoplayer_error();
+            nyarukoplayer_error("一些资源加载失败，请稍后刷新再试。");
         };
     });
 }
@@ -152,9 +167,9 @@ function nyarukoplayer_playmusic(play) {
         document.getElementById("nyarukoplayer_musiccontrol").pause();
     }
 }
-function nyarukoplayer_error() {
+function nyarukoplayer_error(msg) {
     $("#nyarukoplayer_loadingok").css({"width":"100%","background-color":"#FF0033","background":"linear-gradient(#FF6666, #FF0033)","text-align":"center"});
-    $("#nyarukoplayer_loadingok").html("一些资源加载失败，请稍后刷新再试。");
+    $("#nyarukoplayer_loadingok").html(msg);
     $("#titlebox").css("background","transparent");
 }
 function nyarukoplayer_play() {
@@ -428,7 +443,7 @@ function nyarukoplayer_disable(val = false) {
     $.cookie('disable', val, { expires: 365 });
     location.reload(false);
 }
-function musicdiglog_open() {
+function nyarukoplayer_musicdiglog_open() {
     if ($.cookie('playmusic') == "1") {
         nyarukoplayer_playmusic(true);
         $("#nyarukoplayer_musicdiglog").remove();
@@ -454,4 +469,20 @@ function musicdiglog_open() {
             nyarukoplayer_ready();
         });
     }
+}
+function nyarukoplayer_checkWebpSupport() {
+    const canvas = document.createElement('canvas');
+    if (Boolean(canvas.getContext && canvas.getContext('2d'))) {
+        return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+    }
+    return false;
+}
+function nyarukoplayer_browserok() {
+    var brow = navigator.userAgent.toLowerCase();
+    var bInfo="";
+    if(/msie/.test(brow)){bInfo="IE";}
+    if(/firefox/.test(brow)){bInfo="Firefox";}
+    if(/opera/.test(brow)){bInfo="Opera";}
+    if (bInfo=="") {return null;}
+    return "抱歉,暂不支持"+bInfo+",建议使用最新版Chrome。";
 }
