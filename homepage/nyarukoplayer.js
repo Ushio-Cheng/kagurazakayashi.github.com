@@ -67,6 +67,8 @@ var nyarukoplayer_musicbtnimg = "https://www.yoooooooooo.com/yashi/resources/btn
 var nyarukoplayer_conffile = "https://www.yoooooooooo.com/yashi/homepage/nyarukoplayer/nyaruko.json";
 //歌词文件路径,需要在外部自行下载,使用 nyarukoplayer_audioinit(TEXT) 导入.
 var nyarukoplayer_lrcfile = "https://www.yoooooooooo.com/yashi/homepage/nyarukoplayer/nyaruko.lrc";
+//音频文件路径
+var nyarukoplayer_musicfile = "https://www.yoooooooooo.com/yashi/homepage/nyarukoplayer/nyaruko.mp3";
 
 //PRIVATE:
 var nyarukoplayer_imgcache = [];
@@ -318,7 +320,7 @@ function nyarukoplayer_audioinit(lrc) {
         $("#nyarukoplayer_audiodiv").remove();
         return;
     }
-    $("#nyarukoplayer_musiccontrol").html('<source src="homepage/nyarukoplayer/nyaruko.mp3" />');
+    $("#nyarukoplayer_musiccontrol").html('<source src="'+nyarukoplayer_musicfile+'" />');
     var audio = document.getElementById("nyarukoplayer_musiccontrol");
     var audiodiv = $("#nyarukoplayer_audiodiv");
     audio.load();
