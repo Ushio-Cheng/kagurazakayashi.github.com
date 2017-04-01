@@ -59,7 +59,7 @@ var nyarukoplayer_lrctime = 1;
 //标题栏歌词
 var nyarukoplayer_titlelrc = false;
 //在控制台输出信息
-var nyarukoplayer_consolelog = false;
+var nyarukoplayer_consolelog = true;
 //主图片扩展名
 var nyarukoplayer_imgtype = "jpg";
 //WEBP支持
@@ -173,8 +173,8 @@ function nyarukoplayer_error(msg) {
     $("#titlebox").css("background","transparent");
 }
 function nyarukoplayer_play() {
-    var screenwidth = $(window).width();
-    var screenheight = $(window).height();
+    var screenwidth = document.body.clientWidth;
+    var screenheight = document.body.clientHeight;
     $("#nyarukoplayer").append('<div class="nyarukodiv"></div>');
     var nyarukodiv = $(".nyarukodiv");
     var nimg = nyarukoplayer_imgcache[nyarukoplayer_now];
@@ -341,7 +341,7 @@ function nyarukoplayer_audioinit(lrc) {
     audio.load();
     audio.pause();
     audiodiv.click(function(){
-        event.stopPropagation();
+        //event.stopPropagation();
         if(audio.paused)
         {
             nyarukoplayer_playmusic(true);
@@ -487,7 +487,6 @@ function nyarukoplayer_browserok() {
     var brow = navigator.userAgent.toLowerCase();
     var bInfo="";
     if(/msie/.test(brow)){bInfo="IE";}
-    if(/firefox/.test(brow)){bInfo="Firefox";}
     if(/opera/.test(brow)){bInfo="Opera";}
     if (bInfo=="") {return null;}
     return "抱歉,暂不支持"+bInfo+",建议使用最新版Chrome。";
