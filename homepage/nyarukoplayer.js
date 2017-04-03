@@ -65,15 +65,15 @@ var nyarukoplayer_imgtype = "jpg";
 //WEBP支持
 var nyarukoplayer_webp = true;
 //图片路径,支持相对绝对URL路径
-var nyarukoplayer_imgdir = "https://www.yoooooooooo.com/yashi/homepage/nyarukoplayer/";
+var nyarukoplayer_imgdir = "homepage/nyarukoplayer/";
 //音乐按钮图片路径
-var nyarukoplayer_musicbtnimg = "https://www.yoooooooooo.com/yashi/resources/btn_audio.png";
+var nyarukoplayer_musicbtnimg = "resources/btn_audio.png";
 //配置文件路径,需要在外部自行下载,使用 nyarukoplayer_init(JSON) 导入.
-var nyarukoplayer_conffile = "https://www.yoooooooooo.com/yashi/homepage/nyarukoplayer/nyaruko.json";
+var nyarukoplayer_conffile = "homepage/nyarukoplayer/nyaruko.json";
 //歌词文件路径,需要在外部自行下载,使用 nyarukoplayer_audioinit(TEXT) 导入.
-var nyarukoplayer_lrcfile = "https://www.yoooooooooo.com/yashi/homepage/nyarukoplayer/nyaruko.lrc";
+var nyarukoplayer_lrcfile = "homepage/nyarukoplayer/nyaruko.lrc";
 //音频文件路径
-var nyarukoplayer_musicfile = "https://www.yoooooooooo.com/yashi/homepage/nyarukoplayer/nyaruko.mp3";
+var nyarukoplayer_musicfile = "homepage/nyarukoplayer/nyaruko.mp3";
 
 //PRIVATE:
 var nyarukoplayer_imgcache = [];
@@ -88,6 +88,9 @@ var nyarukoplayer_now = 0;
 var nyarukoplayer_lrcoldtime = 0;
 var nyarukoplayer_lrc = null;
 var nyarukoplayer_webpok = false;
+var nyarukoplayer_lrctimer = null;
+var nyarukoplayer_lrctimers = "";
+var nyarukoplayer_lrctimeri = 0;
 function nyarukoplayer_init(data) {
     console.log("[nyarukoplayer.js] Powered by KagurazakaYashi");
     var brow = nyarukoplayer_browserok();
@@ -146,7 +149,7 @@ function nyarukoplayer_init(data) {
         };
         nimg.onerror=function(){
             console.error("加载失败。");
-            nyarukoplayer_error("一些资源加载失败，请稍后刷新再试。");
+            nyarukoplayer_error();
         };
     });
 }
@@ -168,7 +171,7 @@ function nyarukoplayer_playmusic(play) {
         document.getElementById("nyarukoplayer_musiccontrol").pause();
     }
 }
-function nyarukoplayer_error(msg) {
+function nyarukoplayer_error(msg = "一些资源加载失败，请稍后刷新再试。") {
     $("#nyarukoplayer_loadingok").css({"width":"100%","background-color":"#FF0033","background":"linear-gradient(#FF6666, #FF0033)","text-align":"center"});
     $("#nyarukoplayer_loadingok").html(msg);
     $("#titlebox").css("background","transparent");

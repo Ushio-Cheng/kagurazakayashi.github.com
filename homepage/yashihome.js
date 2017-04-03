@@ -1,3 +1,6 @@
+var timer_subtitle = null;
+var timer_subtitles = "KagurazakaYashi's Blog";
+var timer_subtitlei = 0;
 $(document).ready(function(){
     try {
         $.ajaxSetup({
@@ -37,6 +40,7 @@ $(document).ready(function(){
             nyarukoplayer_audioinit(data);
         }
     });
+    timer_subtitle_start();
 });
 $(window).resize(function() {
     nyarukoplayer_resizeendimg();
@@ -62,3 +66,14 @@ document.addEventListener("visibilitychange", function () {
         document.title = "神楽坂雅詩的个人网站 - 神楽坂雅詩的小世界";
     }
 }, false);
+function timer_subtitle_start(){  
+    $("#subtitle").text('');  
+    timer_subtitle = setInterval(function(){  
+        $("#subtitle").append(timer_subtitles.charAt(timer_subtitlei));  
+        if(timer_subtitlei ++ === timer_subtitles.length){  
+            clearInterval(timer_subtitle);
+            timer_subtitlei = 0;
+            //timer_subtitle_start();
+        }
+    },100);
+}
