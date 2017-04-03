@@ -9,6 +9,10 @@ $(document).ready(function(){
     // $("#disablemedia").click(function(){
     //     disablemedia();
     // });
+    //nyarukoplayer callback:
+    nyarukoplayerCallback_AnimateEnd = function() {
+        $("#titlebox").css("background","transparent");
+    }
     timer_subtitle_start();
 });
 $(window).resize(function() {
