@@ -47,7 +47,7 @@ a:active {
     top: 0;
     bottom: 0;
     margin: auto;
-    background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    background: transparent;
 }
 #title {
     height: 80px;
@@ -61,6 +61,7 @@ a:active {
 }
 #subtitle{
     font-family: 'webfont';
+    cursor: url('../resources/hand.cur'), auto;
 }
 .menu {
     position: fixed;

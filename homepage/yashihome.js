@@ -10,13 +10,13 @@ $(document).ready(function(){
     //     disablemedia();
     // });
     //nyarukoplayer callback:
+    nyarukoplayerCallback_AnimateStart = function() {
+        $("#titlebox").css("background","linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0))");
+    }
     nyarukoplayerCallback_AnimateEnd = function() {
         $("#titlebox").css("background","transparent");
     }
     timer_subtitle_start();
-});
-$(window).resize(function() {
-    nyarukoplayer_resizeendimg();
 });
 function showprivacy() {
     if ($(".yashiprivacy").length == 0) {
@@ -40,13 +40,17 @@ document.addEventListener("visibilitychange", function () {
     }
 }, false);
 function timer_subtitle_start(){  
-    $("#subtitle").text('');  
+    $("#subtitle").text('');
+    $("#titlebox").unbind("click");
     timer_subtitle = setInterval(function(){  
         $("#subtitle").append(timer_subtitles.charAt(timer_subtitlei));  
         if(timer_subtitlei ++ === timer_subtitles.length){  
             clearInterval(timer_subtitle);
             timer_subtitlei = 0;
-            //timer_subtitle_start();
+            $("#titlebox").click(function(){
+                timer_subtitle_start();
+            });
+            timer_subtitle = null;
         }
     },100);
 }
