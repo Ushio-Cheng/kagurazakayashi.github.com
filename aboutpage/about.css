@@ -1,0 +1,33 @@
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-repeat: no-repeat;
+    cursor: url('../resources/Arrow.cur'), auto;
+    background-size:100px 100px;
+    color: #FFF;
+    font-family: "思源黑体","Source Han Sans","微软雅黑","Microsoft YaHei","Hiragino Sans GB","STHeiti Light","SimHei";
+}
+a:link {
+	color: #FE99CC;
+	text-decoration: none;
+    cursor: url('../resources/hand.cur'), auto;
+}
+a:visited {
+	text-decoration: none;
+	color: #FE99CC;
+}
+a:hover {
+	text-decoration: none;
+	color: #FE99CC;
+}
+a:active {
+	text-decoration: none;
+	color: #FE99CC;
+}
+.linkbtn {
+    color: #FE99CC;
+	text-decoration: none;
+    cursor: url('../resources/hand.cur'), auto;
+}
