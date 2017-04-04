@@ -7,7 +7,8 @@ body {
     cursor: url('../resources/Arrow.cur'), auto;
     background-size:100px 100px;
     color: #FFF;
-    font-family: "思源黑体","Source Han Sans","微软雅黑","Microsoft YaHei","Hiragino Sans GB","STHeiti Light","SimHei";
+    font-family: "Source Han Sans","思源黑体","微软雅黑","Microsoft YaHei","Hiragino Sans GB","STHeiti Light","SimHei";
+	font-style: "ExtraLight";
 }
 a:link {
 	color: #FE99CC;
@@ -30,4 +31,13 @@ a:active {
     color: #FE99CC;
 	text-decoration: none;
     cursor: url('../resources/hand.cur'), auto;
+}
+.section h1 {
+	font-size: 18pt;
+	display: none;
+}
+.section h2 {
+	font-size: 15pt;
+	display: none;
+	writing-mode:lr-tb;
 }
