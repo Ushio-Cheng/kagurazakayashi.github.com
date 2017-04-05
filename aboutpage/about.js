@@ -30,7 +30,7 @@ $(document).ready(function(){
         afterLoad: function(anchorLink,index) {
             //console.log("afterLoad=",index,", anchorLink=",anchorLink);
             var h1 = $("#section"+index+" h1");
-            var h2 = $("#section"+index+" h2");
+            var h2 = $("#section"+index+" .sub");
             h1.fadeIn(1000,function() {
                 h2.fadeIn(1000,null);
             });
@@ -38,7 +38,7 @@ $(document).ready(function(){
         onLeave: function(index,direction) {
             //console.log("onLeave=",index,", direction=",direction);
             var h1 = $("#section"+index+" h1");
-            var h2 = $("#section"+index+" h2");
+            var h2 = $("#section"+index+" .sub");
             h1.css("display","none");
             h2.css("display","none");
         }

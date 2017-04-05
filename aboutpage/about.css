@@ -33,11 +33,24 @@ a:active {
     cursor: url('../resources/hand.cur'), auto;
 }
 .section h1 {
+	position: absolute;
+	top: 10%;
+	left: 10%;
 	font-size: 18pt;
 	display: none;
 }
-.section h2 {
+.section .sub {
+	position: absolute;
+	left: 10%;
+	bottom: 10%;
 	font-size: 15pt;
 	display: none;
-	writing-mode:lr-tb;
+}
+.section .sub button {
+	border-radius: 10px;
+	border: 1px solid #FFF;
+	width: 150px;
+	height: 50px;
+	background-color: transparent;
+	color: #FFF;
 }
