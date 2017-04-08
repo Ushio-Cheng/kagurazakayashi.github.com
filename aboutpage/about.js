@@ -1,17 +1,5 @@
-$(document).ready(function(){
-    $('#dowebok').fullpage({
-        sectionsColor: [
-            '#1bbc9b',
-            '#4BBFC3',
-            '#7BAABE',
-            '#f90',
-            '#1bbc9b',
-            '#4BBFC3',
-            '#7BAABE',
-            '#f90',
-            '#1bbc9b',
-            '#4BBFC3'
-        ],
+$(function(){
+    $('#yashipage').fullpage({
         navigationTooltips: [
             '生活(博客)',
             '梦想(作品)',
@@ -27,12 +15,14 @@ $(document).ready(function(){
         navigation: true,
         navigationColor: "#FE99CC",
         scrollingSpeed: 700,
+        slidesNavigation: false,
+        controlArrowColor: "transparent",
         afterLoad: function(anchorLink,index) {
             //console.log("afterLoad=",index,", anchorLink=",anchorLink);
             var h1 = $("#section"+index+" h1");
             var h2 = $("#section"+index+" .sub");
-            h1.fadeIn(1000,function() {
-                h2.fadeIn(1000,null);
+            h1.fadeIn(500,function() {
+                h2.fadeIn(500,null);
             });
         },
         onLeave: function(index,direction) {
