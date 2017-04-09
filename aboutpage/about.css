@@ -1,8 +1,6 @@
 @font-face {
     font-family: 'webfont';
-    src: url('webfont.ttf');
-    font-weight: normal;
-    font-style: normal;
+    src: url('webfont.otf');
 }
 body {
 	margin-left: 0px;
@@ -14,7 +12,9 @@ body {
     background-size:100px 100px;
     color: #FFF;
     font-family: "webfont","Source Han Sans","思源黑体","微软雅黑","Microsoft YaHei","Hiragino Sans GB","STHeiti Light","SimHei";
-	font-style: "ExtraLight";
+	
+    font-weight: 100px;
+    font-style: normal;
 	background-color: #000;
 }
 a:link {

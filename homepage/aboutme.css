@@ -1,0 +1,172 @@
+.section .textview {
+	position: absolute;
+	top: 10%;
+	bottom: 10%;
+	width: 320px;
+}
+.section h1 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 18pt;
+	display: none;
+}
+.section .sub {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	font-size: 15pt;
+	display: none;
+}
+.section .sub button {
+	border-radius: 10px;
+	border: 1px solid;
+	width: 150px;
+	height: 50px;
+	background-color: transparent;
+    cursor: url(aboutme/'../resources/hand.cur'), auto;
+}
+.section .sub a {
+	display:block;
+	text-align:center;
+	border-radius: 10px;
+	border: 1px solid;
+	width: 150px;
+	height: 50px;
+	line-height: 50px;
+	background-color: transparent;
+	font-size: 10pt;
+	cursor: url(aboutme/'../resources/hand.cur'), auto;
+}
+.sectionw {
+	color: #FFF;
+	text-shadow: 0px 0px 5px #000;
+}
+.sectionw button {
+	color: #FFF;
+	border-color: #FFF;
+	text-shadow: 0px 0px 5px #000;
+	box-shadow: 0px 0px 5px #000;
+}
+.sectionw a {
+	color: #FFF;
+	text-shadow: 0px 0px 5px #000;
+	box-shadow: 0px 0px 5px #000;
+}
+.sectionw a:link {
+	color: #FFF;
+}
+.sectionw a:visited {
+	color: #FFF;
+}
+.sectionw a:hover {
+	color: #FFF;
+}
+.sectionw a:active {
+	color: #FFF;
+}
+.sectionb {
+	color: #000;
+	text-shadow: 0px 0px 5px #FFF;
+}
+.sectionb button {
+	color: #000;
+	border-color: #000;
+	text-shadow: 0px 0px 5px #FFF;
+	box-shadow: 0px 0px 5px #FFF;
+}
+.sectionb a {
+	color: #000;
+	text-shadow: 0px 0px 5px #FFF;
+	box-shadow: 0px 0px 5px #FFF;
+}
+.sectionb a:link {
+	color: #000;
+}
+.sectionb a:visited {
+	color: #000;
+}
+.sectionb a:hover {
+	color: #000;
+}
+.sectionb a:active {
+	color: #000;
+}
+.section ul li {
+	text-align: center;
+	list-style: none;
+}
+.textviewl {
+	left: 10%;
+}
+.textviewr {
+	right: 10%;
+}
+@media screen and (max-width:640px) {
+	.textviewr {
+		left: 10%;
+	}
+}
+#closeyashipage {
+	position: fixed;
+	right: 20px;
+	top: 20px;
+	width: 20px;
+	height: 20px;
+	z-index: 10;
+	background-color: rgba(0, 0, 0, 0.5);
+	font-size: 10pt;
+	text-align: center;
+	border-radius: 10px;
+}
+#closeyashipage a {
+	color: gray;
+}
+#section1 {
+	background: url(aboutme/shenghuo.jpg) no-repeat right center;
+	background-size:cover;
+}
+#section1 .tfoot {
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	text-align: center;
+	font-size: 10pt;
+}
+#section2 {
+	background: url(aboutme/mengxiang.jpg) no-repeat left center;
+	background-size:cover;
+}
+#section3 {
+	background: url(aboutme/huanle.jpg) no-repeat center center;
+	background-size:cover;
+}
+#section4 {
+	background: url(aboutme/dongman.jpg) no-repeat right center;
+	background-size:cover;
+}
+#section5 {
+	background: url(aboutme/xuanli.jpg) no-repeat left center;
+	background-size:cover;
+}
+#section6 {
+	background: url(aboutme/youqing.jpg) no-repeat center center;
+	background-size:cover;
+}
+#section7 {
+	background: url(aboutme/shenle.jpg) no-repeat right center;
+	background-size:cover;
+}
+#section8 {
+	background: url(aboutme/ganen.jpg) no-repeat center center;
+	background-size:cover;
+}
+#section9 {
+	background: url(aboutme/gexing.jpg) no-repeat right center;
+	background-size:cover;
+}
+#section10 {
+	background: url(aboutme/ys.jpg) no-repeat right center;
+	background-size:cover;
+}

@@ -75,11 +75,16 @@
         <link rel="icon" href="resources/Android-192.png" />
         <link rel="apple-touch-icon" href="resources/iPhone3x-180.png" />
         <link rel="apple-touch-icon-precomposed" href="resources/iPhone3x-180.png" />
+        <!--CSS-->
         <link rel="stylesheet" type="text/css" href="homepage/yashihome.css" />
         <link rel="stylesheet" type="text/css" href="homepage/nyarukoplayer.css" />
+        <link rel="stylesheet" type="text/css" href="homepage/aboutme.css" />
+        <link rel="stylesheet" type="text/css" href="resources/jquery.fullPage.css" />
+        <!--JS-->
         <script type="text/javascript" src="resources/jquery.min.js"></script>
         <!--<script type="text/javascript" src="resources/detectmobilebrowser.js"></script>-->
         <script type="text/javascript" src="resources/jquery.cookie.js"></script>
+        <script type="text/javascript" src="resources/jquery.fullPage.min.js"></script>
         <script type="text/javascript" src="homepage/nyarukoplayer.js"></script>
         <script type="text/javascript" src="homepage/yashihome.js"></script>
     </head>
@@ -149,5 +154,128 @@
             <!--可<a id="disablemedia" class="linkbtn">开关媒体</a>以省流量。-->
         </div>
         <!--<script>(function(d,e,j,h,f,c,b){d.GoogleAnalyticsObject=f;d[f]=d[f]||function(){(d[f].q=d[f].q||[]).push(arguments)},d[f].l=1*new Date();c=e.createElement(j),b=e.getElementsByTagName(j)[0];c.async=1;c.src=h;b.parentNode.insertBefore(c,b)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create","UA-74595381-1","auto");ga("send","pageview");</script>-->
+        <span id="closeyashipage"><a href="javascript:unloadaboutme();">×</a></span>
+        <div id="yashipage">
+            <div id="section1" class="section sectionw active">
+                <div class="textview textviewl">
+                <h1>生活的诗。</h1>
+                <div class="sub">
+                    <p>生活，就像一首诗。</p>
+                    <p>虽充满平仄与条框约束，</p>
+                    <p>也充满色彩与无尽可能。</p>
+                    <a href="javascript:unloadaboutme();">直接进入主页</a>
+                    <div class="tfoot">或 向下浏览更多<br>v</div>
+                </div>
+                </div>
+            </div>
+            <div id="section2" class="section sectionw">
+                <div class="textview textviewr">
+                <h1>梦想的诗。</h1>
+                <div class="sub">
+                    <p>有时，梦想其实很简单。</p>
+                    <p>无非是让一个个单字充满韵律。</p>
+                    <p>mark 一下，<br>与大家一起谱写我们的诗集。</p>
+                    <p><a href="#">我的 Github</a></p>
+                </div>
+                </div>
+            </div>
+            <div id="section3" class="section sectionw">
+                <!--<div class="slide">-->
+                    <div class="textview textviewl">
+                    <h1>欢乐的诗。</h1>
+                    <div class="sub">
+                        <p>欢乐的时光，</p>
+                        <p>总是要和朋友分享。</p>
+                        <p>一起，超越一起的欢乐。</p>
+                        <p><a href="#">我的游戏</a></p>
+                        <!--<p><button type="button" onclick="$.fn.fullpage.moveSlideRight()">我的游戏</button></p>-->
+                    </div>
+                    </div>
+                <!--</div>
+                <div class="slide">
+                    <center>
+                    <p>none</p>
+                    <p><button type="button" onclick="$.fn.fullpage.moveSlideLeft()">返回</button></p>
+                    </center>
+                </div>-->
+            </div>
+            <div id="section4" class="section sectionw">
+                <div class="textview textviewl">
+                <h1>二维的诗。</h1>
+                <div class="sub">
+                    <p>总有人说，<br>动画是给小孩子看的。</p>
+                    <p>我想，<br>他们只是未曾体验过那些感动。</p>
+                    <p>致敬那些陪伴我的二次元。</p>
+                    <p><a href="#">我的追番</a></p>
+                </div>
+                </div>
+            </div>
+            <div id="section5" class="section sectionb">
+                <div class="textview textviewr">
+                <h1>绮丽的诗。</h1>
+                <div class="sub">
+                    <p>我有一个孤单的爱好。</p>
+                    <p>我们有一个不再孤单爱好。</p>
+                    <p>束缚的蛹无法遮挡蝴蝶的翅膀。</p>
+                    <p><a href="#">我的 Google+</a></p>
+                </div>
+                </div>
+            </div>
+            <div id="section6" class="section sectionw">
+                <div class="textview textviewl">
+                <h1>友情的诗。</h1>
+                <div class="sub">
+                    <p>总有些东西，让金钱换不来的。</p>
+                    <p>总有些事情，让金钱无意义的。</p>
+                    <p>总有些故事，让我们一同写的。</p>
+                    <p><a href="#">友情链接</a></p>
+                </div>
+                </div>
+            </div>
+            <div id="section7" class="section sectionb">
+                <div class="textview textviewl">
+                <h1>神楽的诗。</h1>
+                <div class="sub">
+                    <p>就让这些心情穿越时光之门，</p>
+                    <p>传达给未来未知的崭新的你。</p>
+                    <p>神楽坂，记载着大家的故事。</p>
+                    <p><a href="#">神楽坂的故事</a></p>
+                </div>
+                </div>
+            </div>
+            <div id="section8" class="section sectionw">
+                <div class="textview textviewl">
+                <h1>感恩的诗。</h1>
+                <div class="sub">
+                    <p>我为自己很多事情的隐瞒而道歉，</p>
+                    <p>我为别人很多开源的共享而致谢。</p>
+                    <p>怀着愧疚与感恩，走得更远吧。</p>
+                    <p><a href="#">谢谢所有朋友</a></p>
+                </div>
+                </div>
+            </div>
+            <div id="section9" class="section sectionb">
+                <div class="textview textviewl">
+                <h1>个性的诗。</h1>
+                <div class="sub">
+                    <p>我是一个内向的人。</p>
+                    <p>我是一个不爱言谈的人。</p>
+                    <p>除非，让我用键盘代替声带。</p>
+                    <p><a href="#">我的性格</a></p>
+                </div>
+                </div>
+            </div>
+            <div id="section10" class="section sectionb">
+                <div class="textview textviewr">
+                <h1>神楽坂雅詩。</h1>
+                <div class="sub">
+                    <p>这就是我的诗。</p>
+                    <p>文静，淡雅，平凡。</p>
+                    <p>不攀惊涛骇浪，只求淡雅波澜。</p>
+                    <p><a href="javascript:unloadaboutme();">进入主页</a></p>
+                </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

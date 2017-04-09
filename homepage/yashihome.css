@@ -125,3 +125,6 @@ a:active {
 #foot:hover {
     background-color: rgba(0, 0, 0, 0.5);
 }
+#yashipage {
+    z-index: 2;
+}
