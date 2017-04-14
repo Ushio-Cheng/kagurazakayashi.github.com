@@ -1,6 +1,7 @@
 var timer_subtitle = null;
 var timer_subtitles = "KagurazakaYashi's Blog";
 var timer_subtitlei = 0;
+var manualopenaboutme = false;
 $(document).ready(function(){
     loadnyarukoplayer();
     loadaboutme();
@@ -26,6 +27,20 @@ function loadnyarukoplayer() {
         // }
     }
     timer_subtitle_start();
+}
+function openaboutme() {
+    manualopenaboutme = true;
+    //$('#yashipage').css("display","inline");
+    $('#yashipage').animate({
+        "left":"0%"
+    },1000,function () {
+        $('#fp-nav').css("display","inline");
+        $('#closeyashipage').css("display","inline");
+        $('#yashipagetitle').css("display","inline");
+        $.fn.fullpage.setAllowScrolling(true);
+        $.fn.fullpage.setKeyboardScrolling(true);
+        $.fn.fullpage.moveTo(1, 1);
+    });
 }
 function loadaboutme() {
     $('#yashipage').fullpage({
@@ -64,14 +79,21 @@ function loadaboutme() {
     });
 }
 function unloadaboutme() {
-    $('#yashipage').unbind();
-    $('#fp-nav').remove();
-    $('#closeyashipage').remove();
-    nyarukoplayer_playnow();
+    // $('#yashipage').unbind();
+    // $('#fp-nav').remove();
+    // $('#closeyashipage').remove();
+    $('#fp-nav').css("display","none");
+    $('#closeyashipage').css("display","none");
+    $('#yashipagetitle').css("display","none");
+    $.fn.fullpage.setAllowScrolling(false);
+    $.fn.fullpage.setKeyboardScrolling(false);
+    if (!manualopenaboutme) {
+        nyarukoplayer_playnow();
+    }
     $('#yashipage').animate({
         "left":"200%"
     },1000,function () {
-        $('#yashipage').remove();
+        //$('#yashipage').css("display","none");
     });
 }
 function showprivacy() {

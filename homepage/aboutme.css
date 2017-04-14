@@ -119,8 +119,21 @@
 	text-align: center;
 	border-radius: 10px;
 }
+#yashipagetitle {
+	position: fixed;
+	top: 15px;
+	left: 20px;
+	width: 100%;
+	z-index: 9;
+	font-size: 10pt;
+	text-align: left;
+	color: gray;
+}
+#yashipagetitle a {
+	color: gray;
+}
 #closeyashipage a {
-	color: lightgray;
+	color: #FFF;
 }
 #section1 {
 	background: url(aboutme/shenghuo.jpg) no-repeat right center;
