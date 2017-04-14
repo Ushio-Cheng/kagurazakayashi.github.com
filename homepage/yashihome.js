@@ -1,11 +1,22 @@
 var timer_subtitle = null;
 var timer_subtitles = "KagurazakaYashi's Blog";
 var timer_subtitlei = 0;
-var manualopenaboutme = false;
 $(document).ready(function(){
     loadnyarukoplayer();
     loadaboutme();
+    args();
 });
+function args() {
+    var argsarr = window.location.href.split('#');
+    if(argsarr.length > 1) {
+        var arg = argsarr[1];
+        // if (arg != "nonyarukoplayer" && arg != "nomedia") {
+        // }
+        if (arg == "index" || arg == "home") {
+            unloadaboutme();
+        }
+    }
+}
 function loadnyarukoplayer() {
     nyarukoplayer_init("homepage/nyarukoplayer/nyaruko.json",true);
     $("#showprivacy").click(function(){
@@ -29,7 +40,6 @@ function loadnyarukoplayer() {
     timer_subtitle_start();
 }
 function openaboutme() {
-    manualopenaboutme = true;
     //$('#yashipage').css("display","inline");
     $('#yashipage').animate({
         "left":"0%"
@@ -45,15 +55,15 @@ function openaboutme() {
 function loadaboutme() {
     $('#yashipage').fullpage({
         navigationTooltips: [
-            '生活(博客)',
-            '梦想(作品)',
-            '感恩(开源)',
-            '欢乐(游戏)',
-            '二维(动漫)',
-            '绮丽(换装)',
-            '友情(友链)',
-            '神楽(来源)',
-            '个性(性格)',
+            '生活的诗',
+            '梦想的诗',
+            '欢乐的诗',
+            '二维的诗',
+            '绮丽的诗',
+            '友情的诗',
+            '神楽的诗',
+            '感恩的诗',
+            '个性的诗',
             '神楽坂雅詩'
         ],
         navigation: true,
@@ -87,9 +97,7 @@ function unloadaboutme() {
     $('#yashipagetitle').css("display","none");
     $.fn.fullpage.setAllowScrolling(false);
     $.fn.fullpage.setKeyboardScrolling(false);
-    if (!manualopenaboutme) {
-        nyarukoplayer_playnow();
-    }
+    nyarukoplayer_playnow();
     $('#yashipage').animate({
         "left":"200%"
     },1000,function () {
