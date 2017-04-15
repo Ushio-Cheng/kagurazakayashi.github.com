@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'webfont';
-    src: url('zcoolgaoduanhei151105.ttf');
+    src: url('webfont.ttf');
     font-weight: normal;
     font-style: normal;
 }
@@ -64,6 +64,10 @@ a:active {
     text-align: center;
     color: #c46997;
     cursor: url('../resources/hand.cur'), auto;
+    background-color: transparent;
+}
+.tbtn:hover {
+    background-color: lightgray;
 }
 #tbtn1 {
     left: 10px;

@@ -149,11 +149,11 @@ function switchtab(scrtop = 0) {
     var youlian = $("#tbtn1");
     var juhe = $("#tbtn2");
     if (scrtop >= ($("#d2").offset().top-60)) {
-        juhe.css("background-color","#cccccc");
-        youlian.css("background-color","transparent");
+        juhe.css("border-bottom","4px solid #FE99CC");
+        youlian.css("border-bottom","none");
     } else {
-        juhe.css("background-color","transparent");
-        youlian.css("background-color","#cccccc");
+        juhe.css("border-bottom","none");
+        youlian.css("border-bottom","4px solid #FE99CC");
     }
 }
 function showprivacy() {
