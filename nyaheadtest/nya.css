@@ -104,3 +104,35 @@ a:active {
     width: 320px;
     height: 171px;
 }
+#mainmenubox1 {
+    position: fixed;
+    width: 64px;
+    height: 100%;
+    right: 10px;
+    background-color: pink;
+    z-index: 3;
+}
+#mainmenubox2 {
+    position: absolute;
+    background-color:yellow;
+    width: 64px;
+    bottom: 10px;
+    padding: 0px;
+}
+#mainmenubox2 ul {
+  list-style: none;
+}
+#mainmenubox2 ul li {
+  cursor: pointer;
+}
+#mainmenubox2 ul li a {
+  display: block;
+}
+#mainmenubox2 ul li ul {
+  display: none;
+}
+#mainmenubox2 a {
+    width: 64px;
+    height: 64px;
+    background-color: royalblue;
+}
