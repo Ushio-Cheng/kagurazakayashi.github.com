@@ -145,7 +145,7 @@ repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2
     top: 300px;
     width: 100%;
     /*text-align: center;*/
-    background-color: green;
+    /*background-color: green;*/
 }
 .bannerrsize {
     width: 245px;

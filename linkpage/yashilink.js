@@ -56,6 +56,7 @@ function loaddata(data) {
             window.location = items[3];
         });
     });
+    ceramictiles_setting["datacount"] = data.length;
     resize(false);
     setTimeout(function() {
         resize(true);
@@ -89,55 +90,8 @@ function loadplanet2() {
     });
 }
 function resize(ani=false) {
-    var screenwidth = document.body.clientWidth;
-
-    var cw = 10;
-    var ch = 10;
-    var x = cw;
-    var y = ch;
-    var w = 320;
-    var h = 400;
-    var tw = -1;
-    if (screenwidth <= (w + cw * 4)) {
-        cw = 0;
-        // w = screenwidth;
-        console.log("应用手机版式。"+screenwidth);
-    }
-    var wnum = parseInt(screenwidth / (w+cw+cw));
-    var hnum = Math.ceil(datdatacount / wnum);
-    if(wnum > datdatacount){
-        wnum = datdatacount;
-    }
-    var datanum = 0;
-    for(var i=0; i<hnum; i++){
-        y = ch + (h + ch + ch)*i;
-        for(var ii=0; ii<wnum; ii++){
-            x = cw + (w + cw + cw)*ii;
-            var webview = $("#webview"+(datanum++));
-            if (ani == false) {
-                webview.css("top",y);
-                webview.css("left",x);
-            } else {
-                webview.animate({
-                    top:y,
-                    left:x
-                });
-            }
-            if((i == (hnum-1)) && (ii == (wnum-1))){
-                tw = (w + cw + cw)*(ii + 1);
-            }
-        }
-    }
-    y += (h + ch);
-    var contents = $("#contents");
-    contents.css("left",(screenwidth-tw)/2);
-    console.log(screenwidth);
-    console.log(tw);
-    console.log((screenwidth-tw)/2);
-    contents.css("width",tw);
-    contents.css("height",y);
-    // $("#titlebar").css("width",screenwidth);
-    $("#d2").css("top",y+300);
+    var contentsframe = ceramictiles_resize_old(ani);
+    $("#d2").css("top",contentsframe[1]+300);
 }
 function resize_old(ani) {
     var screenwidth = $(window).width();
