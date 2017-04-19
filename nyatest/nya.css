@@ -84,8 +84,8 @@ a:active {
     width: 80%;
     height: 1000px;
     background-color: #eee;
-    background-image: linear-gradient(45deg, lightgray 25%, transparent 25%, transparent 75%, lightgray 75%, lightgray), 
-    linear-gradient(-45deg, lightgray 25%, transparent 25%, transparent 75%, lightgray 75%, lightgray);
+    /*background-image: linear-gradient(45deg, lightgray 25%, transparent 25%, transparent 75%, lightgray 75%, lightgray), 
+    linear-gradient(-45deg, lightgray 25%, transparent 25%, transparent 75%, lightgray 75%, lightgray);*/
     background-size:60px 60px;
     padding-left: 10%;
     padding-right: 10%;
@@ -104,35 +104,59 @@ a:active {
     width: 320px;
     height: 171px;
 }
-#mainmenubox1 {
+#rightbottommenubox1 {
     position: fixed;
     width: 64px;
     height: 100%;
-    right: 10px;
-    background-color: pink;
+    right: 20px;
+    /*background-color: pink;*/
     z-index: 3;
+    overflow:hidden;
 }
-#mainmenubox2 {
+#rightbottommenubox2 {
     position: absolute;
-    background-color:yellow;
+    /*background-color:yellow;*/
     width: 64px;
-    bottom: 10px;
+    bottom: 20px;
     padding: 0px;
 }
-#mainmenubox2 ul {
-  list-style: none;
+#rightbottommenubox2 ul {
+    list-style: none;
+    padding-left: 0;
 }
-#mainmenubox2 ul li {
-  cursor: pointer;
+#rightbottommenubox2 li {
+    display: none;
+    width: 64px;
+    height: 74px;
 }
-#mainmenubox2 ul li a {
-  display: block;
+#rightbottommenubox2 a {
+    display: block;
+    line-height: 64px;
+    text-align: center;
+    text-decoration: none;
+    background-color: royalblue;
+    color: #FFF;
+    border-radius: 32px;
+    width: 64px;
+    height: 64px;
+    font-size: 15pt;
+    cursor: pointer;
 }
-#mainmenubox2 ul li ul {
-  display: none;
+#rightbottommenubox2 a:hover {
+    background-color: lightskyblue;
 }
-#mainmenubox2 a {
+#rightbottommenubox2 #rightbottommenuswitch {
+    display: block;
+    line-height: 64px;
+    text-align: center;
     width: 64px;
     height: 64px;
     background-color: royalblue;
+    color: #FFF;
+    border-radius: 32px;
+    cursor: pointer;
+    font-size: 15pt;
+}
+#rightbottommenubox2 #rightbottommenuswitch:hover {
+    background-color: lightskyblue;
 }
