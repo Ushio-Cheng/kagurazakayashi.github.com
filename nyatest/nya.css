@@ -104,7 +104,7 @@ a:active {
     width: 320px;
     height: 171px;
 }
-#rightbottommenubox1 {
+#rightbottommenubox {
     position: fixed;
     width: 64px;
     height: 100%;
@@ -113,23 +113,23 @@ a:active {
     z-index: 3;
     overflow:hidden;
 }
-#rightbottommenubox2 {
+#rightbottommenuboxf {
     position: absolute;
     /*background-color:yellow;*/
     width: 64px;
     bottom: 20px;
     padding: 0px;
 }
-#rightbottommenubox2 ul {
+#rightbottommenuboxf ul {
     list-style: none;
     padding-left: 0;
 }
-#rightbottommenubox2 li {
+#rightbottommenuboxf li {
     display: none;
     width: 64px;
     height: 74px;
 }
-#rightbottommenubox2 a {
+#rightbottommenuboxf a {
     display: block;
     line-height: 64px;
     text-align: center;
@@ -142,21 +142,50 @@ a:active {
     font-size: 15pt;
     cursor: pointer;
 }
-#rightbottommenubox2 a:hover {
+#rightbottommenuboxf a:hover {
     background-color: lightskyblue;
 }
-#rightbottommenubox2 #rightbottommenuswitch {
+#rightbottommenuboxf #rightbottommenuswitch {
     display: block;
-    line-height: 64px;
-    text-align: center;
     width: 64px;
     height: 64px;
     background-color: royalblue;
-    color: #FFF;
     border-radius: 32px;
     cursor: pointer;
-    font-size: 15pt;
 }
-#rightbottommenubox2 #rightbottommenuswitch:hover {
+#rightbottommenuboxf #rightbottommenuswitch:hover {
     background-color: lightskyblue;
+}
+#rightbottommenuboxf #rightbottommenuswitch span {
+    background-color: #FFF;
+}
+#rightbottommenuboxf #rightbottommenuswitch #rightbottommenuswitch1 {
+    position: absolute;
+    bottom: 30px;
+    left: 22px;
+    width: 20px;
+    height: 4px;
+}
+#rightbottommenuboxf #rightbottommenuswitch #rightbottommenuswitch2 {
+    position: absolute;
+    bottom: 22px;
+    left: 30px;
+    width: 4px;
+    height: 20px;
+}
+@keyframes rightbottommenuopen{
+    0%{
+        transform:rotate(0deg);
+    }
+    100%{
+        transform:rotate(45deg);
+    }
+}
+@keyframes rightbottommenuclose{
+    0%{
+        transform:rotate(45deg);
+    }
+    100%{
+        transform:rotate(0deg);
+    }
 }
