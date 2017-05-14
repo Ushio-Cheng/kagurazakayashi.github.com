@@ -8,13 +8,20 @@ $(document).ready(function(){
 });
 function args() {
     var argsarr = window.location.href.split('#');
+    var arg = argsarr[1];
+    var unloadaboutmenow = false;
+    if ($.cookie("noaboutme") == "1") {
+    	unloadaboutmenow = true;
+    }
     if(argsarr.length > 1) {
-        var arg = argsarr[1];
         // if (arg != "nonyarukoplayer" && arg != "nomedia") {
         // }
         if (arg == "index" || arg == "home") {
-            unloadaboutme();
+            unloadaboutmenow = true;
         }
+    }
+    if (unloadaboutmenow && arg != "aboutme" && arg != "me") {
+    	unloadaboutme(false);
     }
 }
 function loadnyarukoplayer() {
@@ -88,7 +95,10 @@ function loadaboutme() {
         }
     });
 }
-function unloadaboutme() {
+function unloadaboutme(animate = true) {
+	if ($.cookie("noaboutme") != "1") {
+		$.cookie('noaboutme', '1', { expires: 7 });
+	}
     // $('#yashipage').unbind();
     // $('#fp-nav').remove();
     // $('#closeyashipage').remove();
@@ -98,11 +108,15 @@ function unloadaboutme() {
     $.fn.fullpage.setAllowScrolling(false);
     $.fn.fullpage.setKeyboardScrolling(false);
     nyarukoplayer_playnow();
-    $('#yashipage').animate({
-        "left":"200%"
-    },1000,function () {
-        //$('#yashipage').css("display","none");
-    });
+    if (animate) {
+	    $('#yashipage').animate({
+	        "left":"200%"
+	    },1000,function () {
+	        //$('#yashipage').css("display","none");
+	    });
+    } else {
+    	$('#yashipage').css("left","200%");
+    }
 }
 function showprivacy() {
     if ($(".yashiprivacy").length == 0) {
