@@ -1,0 +1,117 @@
+@font-face {
+    font-family: 'digital';
+    font-style: normal;
+    font-weight: 400;
+    src: url(digital-dismay.ttf) format('truetype');
+}
+.yashiminer_meter {
+    position: relative;
+    width: 256px;
+    height: 256px;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+#yashiminer_title {
+    font-size: 10pt;
+}
+.center {
+    text-align: center;
+}
+#yashiminer_l1 {
+    width: 256px;
+    height: 256px;
+    border-radius: 50%;
+    background: skyblue;
+    background-image: linear-gradient(to top, transparent 50%, lightgray 0);
+    /* transform:rotate(0deg); */
+}
+#yashiminer_metertb {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+.cell {
+    display: table-cell;
+    vertical-align: top;
+}
+.yashiminer_spc {
+    width: auto;
+}
+.yashiminer_metercore {
+    position: absolute;
+    background: #FFFFFF;
+    border-radius: 128px;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+}
+.yashiminer_meterblock {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    bottom: 0px;
+    background-color: #FFFFFF;
+}
+.yashiminer_meterinfo {
+    position: absolute;
+    bottom: 128px;
+    text-align: center;
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+}
+.yashiminer_meterinfocell {
+    display: table-cell;
+    vertical-align: center;
+    text-align: center;
+}
+#yashiminer_meterinfo1 {
+    text-align: right;
+    font-size: 12pt;
+}
+#yashiminer_meterinfo2 {
+    text-align: left;
+    font-family: 'digital','monospace';
+    font-size: 14pt;
+}
+.yashiminer_meterpic {
+    width: 156px;
+    height: 142px;
+    background: #FFFFFF url(kuang.png) no-repeat left top;
+    background-position-x: 0px;
+}
+#yashiminer_meterpic1 {
+    display: inline-block;
+}
+#yashiminer_meterpic2 {
+    display: none;
+}
+#yashiminer_spce {
+    display: table-cell;
+}
+.yashiminer_btn {
+    border: skyblue solid 1px;
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+.yashiminer_ctlbr {
+    display: inline-block;
+}
+#yashiminer_startbtn {
+    border-color: #FF0000;
+}
+@media  screen and (max-width: 640px) {
+    #yashiminer_meterpic2 {
+        display: inline-block;
+    }
+    #yashiminer_meterpic1 {
+        display: none;
+    }
+    #yashiminer_spce {
+        display: none;
+    }
+    .yashiminer_ctlbr {
+        display: inherit;
+    }
+}

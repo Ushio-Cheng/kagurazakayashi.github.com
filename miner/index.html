@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>矿工雅诗</title>
+</head>
+<body>
+    <link rel="stylesheet" href="yashiminer.css" type="text/css" />
+    <div id="yashiminer_title" class="center">
+        <h1>雅诗矿机</h1>
+        <p>您可以用您闲置的处理器资源来为我挖矿，我将获得收益，感谢您的支持！<br/>挖矿功能仅在本页面有效，本网站的其他页面不会在后台挖矿。<br/>如果不能启动，可能已被广告屏蔽插件屏蔽，请将本页加入白名单。<br/>请在下面调整线程数开始，不推荐并且不支持在移动设备上挖矿。</p>
+        <p>&emsp;</p><p>&emsp;</p>
+        <div class="yashiminer_meterpic cell" id="yashiminer_meterpic2"></div>
+    </div>
+<div id="yashiminerbox">
+    <div id="yashiminer_metertb">
+        <div class="yashiminer_spc cell"></div>
+        <div class="yashiminer_meter cell">
+            <div>
+                <div id="yashiminer_l1"></div>
+                <div class="yashiminer_meterblock"></div>
+                <div class="yashiminer_metercore"></div>
+                <div class="yashiminer_meterinfo">
+                    <div class="yashiminer_meterinfocell">正在连接...<br/>如果长时间未成功<br/>请检查是否被屏蔽</div>
+                </div>
+            </div>
+        </div>
+        <div class="yashiminer_spc cell"></div>
+        <div class="yashiminer_meterpic cell" id="yashiminer_meterpic1"></div>
+        <div class="yashiminer_spc cell" id="yashiminer_spce"></div>
+    </div>
+    <div class="center">
+        <button class="yashiminer_btn yashiminer_threadbtn" type='button' onclick="yashiminer_setthread(false);">－</button>&emsp;<span id="yashiminer_thread">0</span>&nbsp;线程&emsp;<button class="yashiminer_btn yashiminer_threadbtn" id="yashiminer_startbtn" type='button' onclick="yashiminer_setthread(true);">＋&nbsp;开始</button><div class="yashiminer_ctlbr">&emsp;&emsp;</div>
+        <button class="yashiminer_btn yashiminer_speedbtn" type='button' onclick="yashiminer_setspeed(false);">－</button>&emsp;<span id="yashiminer_speed">100</span>%&nbsp;速度&emsp;<button class="yashiminer_btn yashiminer_speedbtn" type='button' onclick="yashiminer_setspeed(true);">＋</button>
+    </div>
+    <script src="https://ppoi.org/lib/projectpoi.min.js"></script>
+    <script src="yashiminer.js"></script>
+</div>
+</body>
+</html>
